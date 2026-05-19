@@ -1,26 +1,210 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ============================================================
+   Momo Trust Display — drop the font file into /public/fonts/
+   (see public/fonts/README.md). Until then the build stays green
+   and gracefully falls back to the loaded display font.
+   ============================================================ */
+@font-face {
+  font-family: "Momo Trust Display";
+  src:
+    url("/fonts/momo-trust-display.woff2") format("woff2"),
+    url("/fonts/momo-trust-display.woff") format("woff");
+  font-weight: 100 900;
+  font-display: swap;
+  font-style: normal;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+@theme {
+  /* Brand palette ------------------------------------------------ */
+  --color-ink: #05010f; /* deepest base */
+  --color-bg: #0a0118; /* app background */
+  --color-brand: #450693; /* primary background/accents */
+  --color-violet: #8c00ff; /* secondary accent / gradients */
+  --color-pink: #ff3f7f; /* hover / glowing borders */
+  --color-gold: #ffc400; /* highlights / CTAs */
+  --color-fg: #f4f0ff; /* foreground text */
+  --color-muted: #a99fc4; /* muted text */
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  /* Typography --------------------------------------------------- */
+  --font-display:
+    "Momo Trust Display", var(--font-display-fallback), "Sora", system-ui,
+    sans-serif;
+  --font-body: var(--font-body-inter), "Inter", system-ui, sans-serif;
+
+  /* Motion ------------------------------------------------------- */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Animations --------------------------------------------------- */
+  --animate-aurora: aurora 18s ease-in-out infinite alternate;
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-pulse-line: pulse-line 2.4s ease-in-out infinite;
+
+  @keyframes aurora {
+    0% {
+      transform: translate3d(-8%, -4%, 0) scale(1);
+    }
+    50% {
+      transform: translate3d(6%, 5%, 0) scale(1.15);
+    }
+    100% {
+      transform: translate3d(-4%, 3%, 0) scale(1.05);
+    }
+  }
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-14px);
+    }
+  }
+  @keyframes pulse-line {
+    0% {
+      stroke-dashoffset: 60;
+      opacity: 0.25;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      stroke-dashoffset: 0;
+      opacity: 0.4;
+    }
   }
 }
 
+:root {
+  color-scheme: dark;
+}
+
+* {
+  border-color: color-mix(in oklab, var(--color-violet) 22%, transparent);
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-bg);
+  color: var(--color-fg);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--color-pink);
+  color: #ffffff;
+}
+
+/* Custom scrollbar -------------------------------------------------- */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-ink);
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(var(--color-violet), var(--color-pink));
+  border-radius: 999px;
+  border: 2px solid var(--color-ink);
+}
+
+@layer utilities {
+  /* Headline / brand display type */
+  .font-display {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+  }
+
+  /* Gradient text used for emphasis words */
+  .text-gradient {
+    background: linear-gradient(
+      110deg,
+      var(--color-gold) 0%,
+      var(--color-pink) 45%,
+      var(--color-violet) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Frosted glass surface for cards/nav */
+  .glass {
+    background: color-mix(in oklab, var(--color-brand) 14%, transparent);
+    backdrop-filter: blur(16px) saturate(140%);
+    border: 1px solid color-mix(in oklab, var(--color-violet) 28%, transparent);
+  }
+
+  /* Animated conic glow border on hover */
+  .glow-border {
+    position: relative;
+    isolation: isolate;
+  }
+  .glow-border::after {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 1px;
+    background: conic-gradient(
+      from var(--angle, 0deg),
+      transparent 20%,
+      var(--color-pink),
+      var(--color-gold),
+      var(--color-violet),
+      transparent 80%
+    );
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.5s var(--ease-out-expo);
+  }
+  .glow-border:hover::after {
+    opacity: 1;
+    animation: spin-angle 4s linear infinite;
+  }
+
+  /* Soft radial brand spotlight */
+  .spotlight {
+    background: radial-gradient(
+      60% 60% at 50% 0%,
+      color-mix(in oklab, var(--color-violet) 45%, transparent) 0%,
+      transparent 70%
+    );
+  }
+
+  .grain {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.45'/%3E%3C/svg%3E");
+  }
+}
+
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+@keyframes spin-angle {
+  to {
+    --angle: 360deg;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 }
