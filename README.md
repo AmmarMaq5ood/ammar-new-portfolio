@@ -35,8 +35,8 @@ file is supplied. Drop `momo-trust-display.woff2` / `.woff` into
 
 ### Contact details
 
-Replace the flagged `CONTACT_EMAIL` / socials at the top of
-[`src/components/layout/Footer.tsx`](src/components/layout/Footer.tsx).
+Email, GitHub and LinkedIn live in `meta.contact` in
+[`src/data/portfolio.ts`](src/data/portfolio.ts); the footer renders them.
 
 ## Deploy to Vercel
 

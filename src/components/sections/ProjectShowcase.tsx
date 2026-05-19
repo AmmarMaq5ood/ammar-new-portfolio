@@ -67,10 +67,12 @@ export function ProjectShowcase({ project, template, index }: Props) {
   }
 
   const visualLeft = index % 2 === 0;
+  const metrics = Object.entries(project.metrics ?? {});
+  const features = project.keyFeatures ?? [];
   const links = [
-    project.links.live && { label: "Live", href: project.links.live },
-    project.links.github && { label: "GitHub", href: project.links.github },
-    project.links.caseStudy && {
+    project.links?.live && { label: "Visit Live", href: project.links.live },
+    project.links?.github && { label: "GitHub", href: project.links.github },
+    project.links?.caseStudy && {
       label: "Case Study",
       href: project.links.caseStudy,
     },
@@ -86,7 +88,6 @@ export function ProjectShowcase({ project, template, index }: Props) {
         style={{ rotateX: srx, rotateY: sry, transformPerspective: 1200 }}
         className="glow-border glass group relative overflow-hidden rounded-3xl p-6 md:p-9"
       >
-        {/* hover spotlight */}
         <div className="spotlight pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
 
         <div
@@ -101,20 +102,24 @@ export function ProjectShowcase({ project, template, index }: Props) {
 
           {/* content */}
           <div>
-            <div className="mb-4 flex flex-wrap items-center gap-2">
-              <span className="rounded-full border border-pink/40 px-3 py-1 text-[11px] font-medium tracking-wide text-pink uppercase">
-                {project.client}
-              </span>
-              {Object.entries(project.metrics).map(([k, v]) => (
-                <span
-                  key={k}
-                  className="rounded-full bg-violet/15 px-3 py-1 text-[11px] text-muted"
-                >
-                  <span className="font-semibold text-gold">{v}</span>{" "}
-                  {humanize(k)}
-                </span>
-              ))}
-            </div>
+            {(project.client || metrics.length > 0) && (
+              <div className="mb-4 flex flex-wrap items-center gap-2">
+                {project.client && (
+                  <span className="rounded-full border border-pink/40 px-3 py-1 text-[11px] font-medium tracking-wide text-pink uppercase">
+                    {project.client}
+                  </span>
+                )}
+                {metrics.map(([k, v]) => (
+                  <span
+                    key={k}
+                    className="rounded-full bg-violet/15 px-3 py-1 text-[11px] text-muted"
+                  >
+                    <span className="font-semibold text-gold">{v}</span>{" "}
+                    {humanize(k)}
+                  </span>
+                ))}
+              </div>
+            )}
 
             <h3 className="font-display text-2xl leading-tight font-bold text-balance md:text-3xl">
               {project.title}
@@ -122,9 +127,11 @@ export function ProjectShowcase({ project, template, index }: Props) {
             <p className="mt-2 text-sm font-medium text-gold/90">
               {project.tagline}
             </p>
-            <p className="text-muted mt-4 text-sm leading-relaxed text-pretty">
-              {project.summary}
-            </p>
+            {project.summary && (
+              <p className="text-muted mt-4 text-sm leading-relaxed text-pretty">
+                {project.summary}
+              </p>
+            )}
 
             <div className="mt-5 flex flex-wrap gap-2">
               {project.techStack.map((t) => (
@@ -137,30 +144,36 @@ export function ProjectShowcase({ project, template, index }: Props) {
               ))}
             </div>
 
-            <div className="mt-6 flex flex-wrap items-center gap-4">
-              <button
-                onClick={() => setOpen((o) => !o)}
-                aria-expanded={open}
-                className="inline-flex items-center gap-2 rounded-full bg-gold px-5 py-2.5 text-xs font-semibold text-ink transition-shadow duration-300 hover:shadow-[0_0_28px_-4px_#ffc400]"
-              >
-                {open ? "Hide details" : "Key features"}
-                <motion.span animate={{ rotate: open ? 180 : 0 }}>
-                  ↓
-                </motion.span>
-              </button>
-              {links.map((l) => (
-                <a
-                  key={l.label}
-                  href={l.href}
-                  className="text-xs font-medium text-muted underline-offset-4 transition-colors hover:text-pink hover:underline"
-                >
-                  {l.label} ↗
-                </a>
-              ))}
-            </div>
+            {(features.length > 0 || links.length > 0) && (
+              <div className="mt-6 flex flex-wrap items-center gap-4">
+                {features.length > 0 && (
+                  <button
+                    onClick={() => setOpen((o) => !o)}
+                    aria-expanded={open}
+                    className="inline-flex items-center gap-2 rounded-full bg-gold px-5 py-2.5 text-xs font-semibold text-ink transition-shadow duration-300 hover:shadow-[0_0_28px_-4px_#ffc400]"
+                  >
+                    {open ? "Hide details" : "Key features"}
+                    <motion.span animate={{ rotate: open ? 180 : 0 }}>
+                      ↓
+                    </motion.span>
+                  </button>
+                )}
+                {links.map((l) => (
+                  <a
+                    key={l.label}
+                    href={l.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs font-medium text-muted underline-offset-4 transition-colors hover:text-pink hover:underline"
+                  >
+                    {l.label} ↗
+                  </a>
+                ))}
+              </div>
+            )}
 
             <AnimatePresence initial={false}>
-              {open && (
+              {open && features.length > 0 && (
                 <motion.ul
                   key="features"
                   initial={{ height: 0, opacity: 0 }}
@@ -169,7 +182,7 @@ export function ProjectShowcase({ project, template, index }: Props) {
                   transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
                   className="mt-5 space-y-3 overflow-hidden"
                 >
-                  {project.keyFeatures.map((f, i) => (
+                  {features.map((f, i) => (
                     <motion.li
                       key={f}
                       initial={{ opacity: 0, x: -10 }}
