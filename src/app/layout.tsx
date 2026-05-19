@@ -3,6 +3,7 @@ import { Inter, Sora } from "next/font/google";
 import "./globals.css";
 import { SmoothScroll } from "@/components/providers/SmoothScroll";
 import { portfolio } from "@/data/portfolio";
+import { siteUrl } from "@/lib/site";
 
 const inter = Inter({
   variable: "--font-body-inter",
@@ -21,15 +22,44 @@ const sora = Sora({
 
 const { name, title } = portfolio.meta;
 
+const description =
+  "Full-stack developer & automation expert crafting high-performance WordPress, MERN / Next.js, and Launchpad CRM automation solutions.";
+
 export const metadata: Metadata = {
-  title: `${name} — ${title}`,
-  description:
-    "Full-stack developer & automation expert crafting high-performance WordPress, MERN / Next.js, and Launchpad CRM automation solutions.",
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: `${name} — ${title}`,
+    template: `%s — ${name}`,
+  },
+  description,
+  alternates: { canonical: "/" },
+  keywords: [
+    name,
+    "Full-Stack Developer",
+    "WordPress Developer",
+    "Next.js",
+    "MERN",
+    "Launchpad Automation",
+    "CRM Automation",
+  ],
+  authors: [{ name }],
   openGraph: {
     title: `${name} — ${title}`,
     description:
       "High-performance WordPress, MERN / Next.js, and Launchpad automation engineering.",
+    url: "/",
+    siteName: name,
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${name} — ${title}`,
+    description,
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, "max-image-preview": "large" },
   },
 };
 

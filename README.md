@@ -1,36 +1,68 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Ammar Maqsood — Portfolio
 
-## Getting Started
+High-performance, animated portfolio. Interactive WebGL hero, scroll-reveal
+showcase sections, and a single typed content source.
 
-First, run the development server:
+**Stack:** Next.js 16 (App Router) · React 19 · TypeScript · Tailwind CSS v4 ·
+Framer Motion · React Three Fiber / drei · Lenis smooth scroll.
+
+## Local development
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev          # http://localhost:3000
+npm run build        # production build
+npm start            # serve the production build
+npm run lint
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Node **>= 20** is required (see `.nvmrc` / `package.json` → `engines`).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Editing content
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+All content lives in one typed file — no component edits needed to add work:
 
-## Learn More
+- [`src/data/portfolio.ts`](src/data/portfolio.ts) — name, title, branding, and
+  every category/project. Types in [`src/lib/types.ts`](src/lib/types.ts).
+- Each category's `uiTemplate` (`code-to-ui-reveal` | `terminal-data-flow` |
+  `interactive-node-flowchart`) selects its themed visual automatically.
 
-To learn more about Next.js, take a look at the following resources:
+### Brand font
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Headings use **Momo Trust Display**, falling back to **Sora** until the font
+file is supplied. Drop `momo-trust-display.woff2` / `.woff` into
+[`public/fonts/`](public/fonts/) — the `@font-face` is already wired.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Contact details
 
-## Deploy on Vercel
+Replace the flagged `CONTACT_EMAIL` / socials at the top of
+[`src/components/layout/Footer.tsx`](src/components/layout/Footer.tsx).
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Deploy to Vercel
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This repo is zero-config for Vercel (framework auto-detected as Next.js).
+
+1. Push the repo to GitHub/GitLab/Bitbucket.
+2. On [vercel.com/new](https://vercel.com/new), import the repository.
+3. Build settings are auto-detected — no overrides needed:
+   - Build command: `next build`
+   - Output: `.next`
+   - Install: `npm install`
+4. **Environment variables** (Project → Settings → Environment Variables):
+   - `NEXT_PUBLIC_SITE_URL` — *optional*. Leave unset to auto-use the Vercel
+     production domain; set it to your custom domain once attached
+     (e.g. `https://ammarmaqsood.com`). Drives `metadataBase`, Open Graph
+     URLs, `robots.txt`, and `sitemap.xml`.
+5. Deploy. Production builds run from the default branch (`master`).
+
+### Or deploy from the CLI
+
+```bash
+npm i -g vercel
+vercel          # preview deployment
+vercel --prod   # production deployment
+```
+
+SEO routes are generated automatically: `/robots.txt`, `/sitemap.xml`.
+Security headers (`X-Content-Type-Options`, `X-Frame-Options`,
+`Referrer-Policy`, `Permissions-Policy`) are set in `next.config.ts`.
