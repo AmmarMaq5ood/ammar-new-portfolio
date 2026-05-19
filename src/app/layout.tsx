@@ -23,7 +23,7 @@ const sora = Sora({
 const { name, title } = portfolio.meta;
 
 const description =
-  "Full-stack developer & automation expert crafting high-performance WordPress, MERN / Next.js, and Launchpad CRM automation solutions.";
+  "Full-stack developer & automation expert crafting high-performance WordPress, MERN / Next.js, and GHL CRM automation solutions.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -39,14 +39,14 @@ export const metadata: Metadata = {
     "WordPress Developer",
     "Next.js",
     "MERN",
-    "Launchpad Automation",
+    "GHL Automation",
     "CRM Automation",
   ],
   authors: [{ name }],
   openGraph: {
     title: `${name} — ${title}`,
     description:
-      "High-performance WordPress, MERN / Next.js, and Launchpad automation engineering.",
+      "High-performance WordPress, MERN / Next.js, and GHL automation engineering.",
     url: "/",
     siteName: name,
     type: "website",

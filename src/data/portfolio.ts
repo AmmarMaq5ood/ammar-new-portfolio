@@ -139,7 +139,7 @@ export const portfolio: Portfolio = {
     },
     {
       id: "automation-chatbots",
-      title: "Launchpad Automation & Chatbot Expert",
+      title: "GHL Automation & Chatbot Expert",
       description:
         "Advanced CRM workflow architectures, third-party integrations, and intelligent conversational agents.",
       uiTemplate: "interactive-node-flowchart",
@@ -150,7 +150,7 @@ export const portfolio: Portfolio = {
           tagline:
             "Comprehensive educational tracking built entirely within the CRM.",
           techStack: [
-            "Launchpad Workflow API",
+            "GHL Workflow API",
             "Custom Fields",
             "Trigger Pipelines",
           ],
@@ -165,10 +165,10 @@ export const portfolio: Portfolio = {
           id: "lp-zoominfo",
           title: "API Lead Enrichment Integration",
           tagline: "Real-time B2B data syncing and profile routing.",
-          techStack: ["Launchpad Core API", "Node.js", "Webhooks"],
+          techStack: ["GHL Core API", "Node.js", "Webhooks"],
           keyFeatures: [
             "Real-time webhook listeners for inbound data",
-            "Automated lead enrichment mapping to custom Launchpad fields",
+            "Automated lead enrichment mapping to custom GHL fields",
           ],
           animationHint:
             "Data packets glowing as they move from an external API cloud directly into CRM database slots.",
@@ -178,7 +178,7 @@ export const portfolio: Portfolio = {
           title: "Intelligent Client-Facing Chatbots",
           tagline: "Automated conversational routing and qualification.",
           techStack: [
-            "Launchpad AI Studio",
+            "GHL AI Studio",
             "Conversational Logic",
             "Conditional Routing",
           ],

@@ -21,7 +21,7 @@ const EDGES = [
 const byId = (id: string) => NODES.find((n) => n.id === id)!;
 
 /**
- * Launchpad template flair: a multi-node automation graph. Triggering
+ * GHL template flair: a multi-node automation graph. Triggering
  * the entry point sends sequential light pulses racing along the
  * glowing paths through each data node.
  */
