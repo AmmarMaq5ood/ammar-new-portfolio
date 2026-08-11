@@ -1,22 +1,25 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Sora } from "next/font/google";
+import { Bricolage_Grotesque, Instrument_Sans, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
-import { SmoothScroll } from "@/components/providers/SmoothScroll";
 import { portfolio } from "@/data/portfolio";
 import { siteUrl } from "@/lib/site";
 
-const inter = Inter({
-  variable: "--font-body-inter",
+const bricolage = Bricolage_Grotesque({
+  variable: "--font-bricolage",
   subsets: ["latin"],
   display: "swap",
 });
 
-// Premium geometric display face — used as the graceful fallback
-// for "Momo Trust Display" until the brand font file is supplied.
-const sora = Sora({
-  variable: "--font-display-fallback",
+const instrument = Instrument_Sans({
+  variable: "--font-instrument",
   subsets: ["latin"],
-  weight: ["400", "600", "700", "800"],
+  display: "swap",
+});
+
+const plexMono = IBM_Plex_Mono({
+  variable: "--font-plex-mono",
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
   display: "swap",
 });
 
@@ -64,8 +67,8 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0a0118",
-  colorScheme: "dark",
+  themeColor: "#f6f4fa",
+  colorScheme: "light",
 };
 
 export default function RootLayout({
@@ -74,11 +77,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${sora.variable} h-full antialiased`}
+      className={`${bricolage.variable} ${instrument.variable} ${plexMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full bg-bg text-fg selection:bg-pink">
-        <SmoothScroll>{children}</SmoothScroll>
-      </body>
+      <body className="min-h-full bg-paper text-ink">{children}</body>
     </html>
   );
 }

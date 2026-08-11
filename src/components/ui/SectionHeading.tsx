@@ -3,52 +3,43 @@
 import { Reveal } from "./Reveal";
 
 interface SectionHeadingProps {
-  eyebrow: string;
+  /** 1-based stage number along the pipeline. */
+  stage: number;
+  /** Number of entries in this stage. */
+  count: number;
+  /** What the entries are — "projects", "systems"… */
+  countLabel: string;
   title: string;
   description?: string;
-  /** Index used for the oversized ghost numeral. */
-  index?: number;
 }
 
 export function SectionHeading({
-  eyebrow,
+  stage,
+  count,
+  countLabel,
   title,
   description,
-  index,
 }: SectionHeadingProps) {
   return (
-    <div className="relative mb-14 md:mb-20">
-      {typeof index === "number" && (
-        <span
-          aria-hidden
-          className="font-display pointer-events-none absolute -top-16 -left-2 select-none text-[7rem] leading-none font-extrabold text-violet/10 md:text-[11rem]"
-        >
-          {String(index + 1).padStart(2, "0")}
-        </span>
-      )}
-
+    <header className="mb-10 md:mb-14">
       <Reveal>
-        <div className="mb-4 flex items-center gap-3">
-          <span className="h-px w-10 bg-linear-to-r from-pink to-gold" />
-          <span className="text-xs font-medium tracking-[0.3em] text-gold uppercase">
-            {eyebrow}
-          </span>
-        </div>
+        <p className="annotation">
+          Stage {String(stage).padStart(2, "0")} /{" "}
+          {String(count).padStart(2, "0")} {countLabel}
+        </p>
       </Reveal>
-
-      <Reveal delay={0.08}>
-        <h2 className="font-display max-w-4xl text-4xl leading-[1.05] font-bold text-balance md:text-6xl">
+      <Reveal delay={0.06}>
+        <h2 className="font-display mt-4 max-w-3xl text-3xl leading-tight font-extrabold tracking-tight text-balance md:text-5xl">
           {title}
         </h2>
       </Reveal>
-
       {description && (
-        <Reveal delay={0.16}>
-          <p className="text-muted mt-5 max-w-2xl text-base text-pretty md:text-lg">
+        <Reveal delay={0.12}>
+          <p className="mt-4 max-w-2xl text-base text-muted text-pretty">
             {description}
           </p>
         </Reveal>
       )}
-    </div>
+    </header>
   );
 }

@@ -1,9 +1,3 @@
-/** Visual treatment applied to a category's showcase section. */
-export type UiTemplate =
-  | "code-to-ui-reveal"
-  | "terminal-data-flow"
-  | "interactive-node-flowchart";
-
 export interface ProjectLinks {
   live?: string;
   github?: string;
@@ -28,9 +22,12 @@ export interface Project {
 
 export interface Category {
   id: string;
+  /** Two-letter ledger code, e.g. "WP" → rows WP·01, WP·02 … */
+  code: string;
+  /** Short label used in navigation and the hero index. */
+  short: string;
   title: string;
   description: string;
-  uiTemplate: UiTemplate;
   projects: Project[];
 }
 
@@ -63,7 +60,7 @@ export interface Portfolio {
   categories: Category[];
 }
 
-/** True when a project carries enough depth for the expandable showcase. */
+/** True when a project carries enough depth for the expanded case block. */
 export function isRichProject(p: Project): boolean {
   return Boolean(p.summary) || (p.keyFeatures?.length ?? 0) > 0;
 }

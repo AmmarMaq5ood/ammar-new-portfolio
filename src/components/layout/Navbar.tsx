@@ -3,62 +3,54 @@
 import { useState } from "react";
 import { motion, useMotionValueEvent, useScroll } from "framer-motion";
 import { portfolio } from "@/data/portfolio";
-import { MagneticButton } from "@/components/ui/MagneticButton";
 
-const initials = portfolio.meta.name
-  .split(" ")
-  .map((w) => w[0])
-  .join("");
+const { name } = portfolio.meta;
 
 export function Navbar() {
   const { scrollY } = useScroll();
   const [scrolled, setScrolled] = useState(false);
 
-  useMotionValueEvent(scrollY, "change", (y) => setScrolled(y > 40));
+  useMotionValueEvent(scrollY, "change", (y) => setScrolled(y > 24));
 
   return (
     <motion.header
-      initial={{ y: -80, opacity: 0 }}
+      initial={{ y: -56, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-      className="fixed inset-x-0 top-0 z-50 flex justify-center px-4 pt-4"
+      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+      className={`fixed inset-x-0 top-0 z-50 border-b transition-colors duration-300 ${
+        scrolled
+          ? "border-line bg-paper/85 backdrop-blur-md"
+          : "border-transparent bg-transparent"
+      }`}
     >
-      <nav
-        className={`flex w-full max-w-6xl items-center justify-between rounded-2xl px-5 py-3 transition-all duration-500 ${
-          scrolled
-            ? "glass shadow-[0_8px_40px_-12px_rgba(140,0,255,0.5)]"
-            : "border border-transparent bg-transparent"
-        }`}
-      >
-        <a
-          href="#top"
-          className="font-display flex items-center gap-2 text-lg font-extrabold tracking-tight"
-        >
-          <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-linear-to-br from-violet to-pink text-sm text-white">
-            {initials}
-          </span>
-          <span className="hidden sm:block">{portfolio.meta.name}</span>
+      <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6 md:px-10">
+        <a href="#top" className="font-display text-base font-bold tracking-tight">
+          {name}
+          <span className="text-violet">.</span>
         </a>
 
-        <ul className="hidden items-center gap-7 text-sm text-muted md:flex">
-          {portfolio.categories.map((c) => (
+        <ul className="hidden items-center gap-8 md:flex">
+          {portfolio.categories.map((c, i) => (
             <li key={c.id}>
               <a
                 href={`#${c.id}`}
-                className="relative transition-colors hover:text-fg"
+                className="group flex items-baseline gap-1.5 text-sm font-medium text-muted transition-colors hover:text-ink"
               >
-                {c.title.split(" ")[0]}
+                <span className="font-mono text-[10px] text-violet">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                {c.short}
               </a>
             </li>
           ))}
         </ul>
 
-        <MagneticButton
+        <a
           href="#contact"
-          className="rounded-full bg-gold px-5 py-2.5 text-xs font-semibold text-ink transition-shadow duration-300 hover:shadow-[0_0_28px_-4px_#ffc400]"
+          className="rounded-full bg-ink px-5 py-2 text-xs font-semibold text-paper transition-colors duration-300 hover:bg-violet"
         >
           Get in touch
-        </MagneticButton>
+        </a>
       </nav>
     </motion.header>
   );

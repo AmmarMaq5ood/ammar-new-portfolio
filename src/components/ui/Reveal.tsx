@@ -5,7 +5,7 @@ import type { ReactNode } from "react";
 
 type Direction = "up" | "down" | "left" | "right" | "scale";
 
-const offset = 36;
+const offset = 20;
 
 function buildVariants(dir: Direction, reduced: boolean): Variants {
   const hidden =

@@ -1,9 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { portfolio } from "@/data/portfolio";
 import { Reveal } from "@/components/ui/Reveal";
-import { MagneticButton } from "@/components/ui/MagneticButton";
 
 const { name, title, contact } = portfolio.meta;
 
@@ -27,98 +25,79 @@ export function Footer() {
   return (
     <footer
       id="contact"
-      className="relative scroll-mt-24 overflow-hidden border-t border-violet/20 px-6 py-28 md:px-10 md:py-40"
+      className="scroll-mt-24 border-t border-line bg-surface px-6 pt-24 pb-10 md:px-10 md:pt-32"
     >
-      <div
-        aria-hidden
-        className="absolute inset-x-0 -bottom-1/3 -z-10 mx-auto h-[60vh] w-[80vw] rounded-full opacity-40 blur-[120px]"
-        style={{
-          background:
-            "radial-gradient(circle, #8c00ff 0%, #ff3f7f 45%, transparent 70%)",
-        }}
-      />
-
-      <div className="mx-auto max-w-5xl text-center">
+      <div className="mx-auto max-w-6xl">
         <Reveal>
-          <span className="text-xs font-medium tracking-[0.3em] text-gold uppercase">
-            Let&apos;s build something
-          </span>
+          <p className="annotation">Final stage / contact</p>
         </Reveal>
-        <Reveal delay={0.08}>
-          <h2 className="font-display mx-auto mt-5 max-w-3xl text-4xl leading-[1.05] font-extrabold text-balance md:text-7xl">
+        <Reveal delay={0.06}>
+          <h2 className="font-display mt-5 max-w-3xl text-4xl leading-[1.02] font-extrabold tracking-tight text-balance md:text-6xl">
             Have a project that needs{" "}
-            <span className="text-gradient">serious engineering?</span>
+            <span className="text-violet">serious engineering?</span>
           </h2>
         </Reveal>
 
-        <Reveal delay={0.16}>
-          <div className="mt-10 flex flex-wrap justify-center gap-4">
-            <MagneticButton
+        <Reveal delay={0.12}>
+          <div className="mt-10 flex flex-wrap items-center gap-3">
+            <a
               href={`mailto:${contact.email}`}
-              className="rounded-full bg-gold px-8 py-4 text-sm font-semibold text-ink transition-shadow duration-300 hover:shadow-[0_0_44px_-4px_#ffc400]"
+              className="inline-flex items-center gap-2 rounded-full bg-ink px-7 py-3.5 text-sm font-semibold text-paper transition-colors duration-300 hover:bg-violet"
             >
               {contact.email}
-            </MagneticButton>
-
+            </a>
             {contact.github && (
-              <MagneticButton
+              <a
                 href={contact.github}
-                strength={14}
-                aria-label="GitHub profile"
-                className="glow-border inline-flex items-center gap-2 rounded-full border border-violet/40 px-7 py-4 text-sm font-semibold text-fg transition-colors hover:border-pink"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-full border border-line px-6 py-3.5 text-sm font-semibold transition-colors duration-300 hover:border-violet hover:text-violet"
               >
                 <GitHubIcon className="h-4 w-4" />
                 GitHub
-              </MagneticButton>
+              </a>
             )}
-
             {contact.linkedin && (
-              <MagneticButton
+              <a
                 href={contact.linkedin}
-                strength={14}
-                aria-label="LinkedIn profile"
-                className="glow-border inline-flex items-center gap-2 rounded-full border border-violet/40 px-7 py-4 text-sm font-semibold text-fg transition-colors hover:border-pink"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-full border border-line px-6 py-3.5 text-sm font-semibold transition-colors duration-300 hover:border-violet hover:text-violet"
               >
                 <LinkedInIcon className="h-4 w-4" />
                 LinkedIn
-              </MagneticButton>
+              </a>
             )}
           </div>
         </Reveal>
+
+        {/* Bottom bar — Name | Profession | LinkedIn Logo */}
+        <div className="mt-24 flex flex-col items-center justify-center gap-3 border-t border-line pt-8 text-sm text-muted sm:flex-row sm:gap-5">
+          <span className="font-display font-semibold text-ink">{name}</span>
+          <span aria-hidden className="hidden text-line sm:inline">
+            |
+          </span>
+          <span>{title}</span>
+          <span aria-hidden className="hidden text-line sm:inline">
+            |
+          </span>
+          {contact.linkedin && (
+            <a
+              href={contact.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn profile"
+              className="text-muted transition-colors hover:text-violet"
+            >
+              <LinkedInIcon className="h-5 w-5" />
+            </a>
+          )}
+        </div>
+
+        <p className="mt-6 text-center font-mono text-[11px] text-muted/70">
+          © {new Date().getFullYear()} {name} · Built with Next.js
+        </p>
       </div>
-
-      {/* Bottom bar — Name | Profession | LinkedIn Logo */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        className="mx-auto mt-24 flex max-w-7xl flex-col items-center justify-center gap-3 border-t border-violet/15 pt-8 text-sm text-muted sm:flex-row sm:gap-5"
-      >
-        <span className="font-display font-semibold text-fg">{name}</span>
-        <span aria-hidden className="hidden text-violet/50 sm:inline">
-          |
-        </span>
-        <span>{title}</span>
-        <span aria-hidden className="hidden text-violet/50 sm:inline">
-          |
-        </span>
-        {contact.linkedin && (
-          <a
-            href={contact.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="LinkedIn profile"
-            className="text-muted transition-colors hover:text-pink"
-          >
-            <LinkedInIcon className="h-5 w-5" />
-          </a>
-        )}
-      </motion.div>
-
-      <p className="mt-6 text-center text-xs text-muted/60">
-        © {new Date().getFullYear()} {name}. Built with Next.js · Framer Motion
-        · React Three Fiber
-      </p>
     </footer>
   );
 }

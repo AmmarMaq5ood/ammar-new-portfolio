@@ -10,12 +10,12 @@ export const portfolio: Portfolio = {
     name: "Ammar Maqsood",
     title: "Full-Stack Developer & Automation Expert",
     branding: {
-      primaryFont: "Momo Trust Display",
+      primaryFont: "Bricolage Grotesque",
       colors: {
-        background: "#450693",
-        accentPrimary: "#8C00FF",
-        accentSecondary: "#FF3F7F",
-        highlight: "#FFC400",
+        background: "#F6F4FA",
+        accentPrimary: "#6C16E8",
+        accentSecondary: "#191231",
+        highlight: "#F2B705",
       },
       footer: {
         layout: "Name | Profession | LinkedIn Logo",
@@ -30,10 +30,11 @@ export const portfolio: Portfolio = {
   categories: [
     {
       id: "wordpress",
+      code: "WP",
+      short: "WordPress",
       title: "WordPress Theme & Plugin Development",
       description:
         "High-performance directory, marketplace, and corporate themes built with scalable custom architecture.",
-      uiTemplate: "code-to-ui-reveal",
       projects: [
         {
           id: "wp-adforest",
@@ -88,10 +89,11 @@ export const portfolio: Portfolio = {
     },
     {
       id: "mern-nextjs",
+      code: "AP",
+      short: "Web Apps",
       title: "MERN, Next.js & Custom Solutions",
       description:
         "Production-ready web applications, decoupled architectures, and high-performance frontends.",
-      uiTemplate: "terminal-data-flow",
       projects: [
         {
           id: "mern-gogrow",
@@ -139,10 +141,11 @@ export const portfolio: Portfolio = {
     },
     {
       id: "automation-chatbots",
+      code: "GH",
+      short: "Automation",
       title: "GHL Automation & Chatbot Expert",
       description:
         "Advanced CRM workflow architectures, third-party integrations, and intelligent conversational agents.",
-      uiTemplate: "interactive-node-flowchart",
       projects: [
         {
           id: "lp-sms",
