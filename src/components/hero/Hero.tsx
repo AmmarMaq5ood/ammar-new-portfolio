@@ -97,6 +97,24 @@ export function Hero() {
           {surname}
         </div>
 
+        {/* The portrait: a cut-out PNG, large and centre-right, behind the
+            name and the cards but in front of the watermark. */}
+        {portrait && (
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-x-0 top-[20%] bottom-0 z-[5] sm:top-[12%] md:left-[16%] md:right-[22%] md:top-[7%]"
+          >
+            <Image
+              src={portrait}
+              alt=""
+              fill
+              priority
+              sizes="(min-width: 768px) 62vw, 100vw"
+              className="object-contain object-bottom"
+            />
+          </div>
+        )}
+
         {/* Top row: tagline + featured card */}
         <div className="relative z-10 flex flex-col gap-8 px-5 pt-28 sm:flex-row sm:items-start sm:justify-between md:px-10 md:pt-36">
           <motion.p

@@ -70,7 +70,11 @@ export interface PortfolioMeta {
   title: string;
   /** One-line positioning shown under the name. */
   intro: string;
-  /** Optional portrait (path under /public) for the hero card. */
+  /**
+   * Optional portrait: a cut-out PNG with a transparent background, path
+   * under /public. Shown large in the hero behind the name and as the
+   * avatar in the "Let's talk" card.
+   */
   portrait?: string;
   branding: {
     primaryFont: string;
