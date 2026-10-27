@@ -1,17 +1,18 @@
 import type { Metadata, Viewport } from "next";
-import { Bricolage_Grotesque, Instrument_Sans, IBM_Plex_Mono } from "next/font/google";
+import { Archivo, Inter, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import { portfolio } from "@/data/portfolio";
 import { siteUrl } from "@/lib/site";
 
-const bricolage = Bricolage_Grotesque({
-  variable: "--font-bricolage",
+const archivo = Archivo({
+  variable: "--font-archivo",
   subsets: ["latin"],
+  axes: ["wdth"],
   display: "swap",
 });
 
-const instrument = Instrument_Sans({
-  variable: "--font-instrument",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
   display: "swap",
 });
@@ -26,7 +27,7 @@ const plexMono = IBM_Plex_Mono({
 const { name, title } = portfolio.meta;
 
 const description =
-  "Full-stack developer & automation expert crafting high-performance WordPress, MERN / Next.js, and GHL CRM automation solutions.";
+  "AI-native full-stack developer: production Node.js / React apps, AI agents on n8n and Make.com, and CRM automations, built with Claude Code, Codex and Cursor.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -38,18 +39,23 @@ export const metadata: Metadata = {
   alternates: { canonical: "/" },
   keywords: [
     name,
+    "AI-native developer",
     "Full-Stack Developer",
-    "WordPress Developer",
+    "AI agents",
+    "n8n",
+    "Make.com",
+    "Claude Code",
+    "Node.js",
+    "React",
     "Next.js",
-    "MERN",
-    "GHL Automation",
-    "CRM Automation",
+    "GoHighLevel automation",
+    "WordPress Developer",
   ],
   authors: [{ name }],
   openGraph: {
     title: `${name} — ${title}`,
     description:
-      "High-performance WordPress, MERN / Next.js, and GHL automation engineering.",
+      "Production AI agents, automations and full-stack products, built with coding agents and shipped with CI.",
     url: "/",
     siteName: name,
     type: "website",
@@ -67,7 +73,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#f6f4fa",
+  themeColor: "#f1521c",
   colorScheme: "light",
 };
 
@@ -77,7 +83,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${bricolage.variable} ${instrument.variable} ${plexMono.variable} h-full antialiased`}
+      className={`${archivo.variable} ${inter.variable} ${plexMono.variable} h-full antialiased`}
     >
       <body className="min-h-full bg-paper text-ink">{children}</body>
     </html>

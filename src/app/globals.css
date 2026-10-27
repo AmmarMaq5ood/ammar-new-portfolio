@@ -1,19 +1,22 @@
 @import "tailwindcss";
 
 @theme {
-  /* Palette — ink on violet-tinted paper, one live accent ------------ */
-  --color-paper: #f6f4fa; /* page background */
-  --color-surface: #ffffff; /* raised rows / cards */
-  --color-ink: #191231; /* primary text */
-  --color-muted: #665e7e; /* secondary text */
-  --color-line: #dcd6e9; /* hairlines & borders */
-  --color-violet: #6c16e8; /* the accent — links, nodes, hovers */
-  --color-gold: #f2b705; /* tiny "live" markers only, never text */
+  /* Palette — editorial: ink on warm off-white, one hot orange ------------ */
+  --color-paper: #f4f3f0; /* page background */
+  --color-surface: #ffffff; /* raised tiles / cards */
+  --color-tile: #e9e8e4; /* quiet grey info tiles */
+  --color-ink: #0f0f0f; /* primary text */
+  --color-muted: #6b6a66; /* secondary text */
+  --color-faint: #a3a19b; /* the grey second line of a headline */
+  --color-line: #dedcd6; /* hairlines & borders */
+  --color-accent: #f1521c; /* the orange — hero, links, markers */
+  --color-accent-deep: #d8430f; /* hover state of the orange */
+  --color-black: #111111; /* black cards & footer */
 
   /* Typography ------------------------------------------------------- */
-  --font-display: var(--font-bricolage), "Bricolage Grotesque", system-ui,
+  --font-display: var(--font-archivo), "Archivo", "Arial Black", system-ui,
     sans-serif;
-  --font-sans: var(--font-instrument), "Instrument Sans", system-ui, sans-serif;
+  --font-sans: var(--font-inter), "Inter", system-ui, sans-serif;
   --font-mono: var(--font-plex-mono), "IBM Plex Mono", ui-monospace, monospace;
 
   /* Motion ----------------------------------------------------------- */
@@ -46,12 +49,12 @@ body {
 }
 
 ::selection {
-  background: var(--color-violet);
+  background: var(--color-accent);
   color: #ffffff;
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-violet);
+  outline: 2px solid var(--color-accent);
   outline-offset: 3px;
   border-radius: 2px;
 }
@@ -59,10 +62,38 @@ body {
 @layer utilities {
   .font-display {
     font-family: var(--font-display);
-    letter-spacing: -0.015em;
+    letter-spacing: -0.02em;
   }
 
-  /* Mono annotation label — the schematic voice of the page */
+  /* The big editorial headline: uppercase, heavy, tight */
+  .headline {
+    font-family: var(--font-display);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: -0.035em;
+    line-height: 0.92;
+  }
+
+  /* The hero name: heavy and wide */
+  .name-wide {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-stretch: 118%;
+    text-transform: uppercase;
+    letter-spacing: -0.03em;
+    line-height: 0.82;
+  }
+
+  /* Small uppercase label — the quiet voice of the page */
+  .label {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+  }
+
+  /* Mono micro-label for codes and schematic text */
   .annotation {
     font-family: var(--font-mono);
     font-size: 0.6875rem;
@@ -71,16 +102,25 @@ body {
     color: var(--color-muted);
   }
 
-  /* Dashed schematic hairline */
-  .rule-dashed {
-    background-image: linear-gradient(
-      to right,
-      var(--color-line) 55%,
-      transparent 45%
-    );
-    background-size: 8px 1px;
-    background-repeat: repeat-x;
-    height: 1px;
+  /* Underlined nav link with the thin ink rule */
+  .link-rule {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 5px;
+    text-decoration-color: color-mix(in srgb, currentColor 45%, transparent);
+    transition: text-decoration-color 200ms ease, color 200ms ease;
+  }
+  .link-rule:hover {
+    text-decoration-color: currentColor;
+  }
+
+  /* Hero grid: faint lines, drawn once per quarter */
+  .hero-grid {
+    background-image:
+      linear-gradient(to right, rgba(255, 255, 255, 0.16) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.16) 1px, transparent 1px);
+    background-size: 25% 100%, 100% 33.333%;
+    background-position: 0 0, 0 0;
   }
 }
 

@@ -1,41 +1,61 @@
 "use client";
 
 import { Reveal } from "./Reveal";
+import { PillLabel } from "./Asterisk";
 
 interface SectionHeadingProps {
-  /** 1-based stage number along the pipeline. */
-  stage: number;
-  /** Number of entries in this stage. */
-  count: number;
-  /** What the entries are — "projects", "systems"… */
-  countLabel: string;
+  /** The pill label: "✳ SELECTED WORK" */
+  label: string;
+  /** First, black part of the headline. */
   title: string;
+  /** Trailing grey part of the headline. */
+  muted?: string;
   description?: string;
+  /** Right-aligned count, e.g. "06 systems". */
+  count?: string;
+  dark?: boolean;
 }
 
 export function SectionHeading({
-  stage,
-  count,
-  countLabel,
+  label,
   title,
+  muted,
   description,
+  count,
+  dark = false,
 }: SectionHeadingProps) {
   return (
     <header className="mb-10 md:mb-14">
       <Reveal>
-        <p className="annotation">
-          Stage {String(stage).padStart(2, "0")} /{" "}
-          {String(count).padStart(2, "0")} {countLabel}
-        </p>
+        <div className="flex items-center justify-between gap-4">
+          <PillLabel tone={dark ? "dark" : "paper"}>{label}</PillLabel>
+          {count && (
+            <span className={`annotation ${dark ? "text-white/60" : ""}`}>{count}</span>
+          )}
+        </div>
       </Reveal>
       <Reveal delay={0.06}>
-        <h2 className="font-display mt-4 max-w-3xl text-3xl leading-tight font-extrabold tracking-tight text-balance md:text-5xl">
+        <h2
+          className={`headline mt-5 max-w-4xl text-[clamp(2.4rem,6.5vw,5.25rem)] text-balance ${
+            dark ? "text-white" : "text-ink"
+          }`}
+        >
           {title}
+          {muted && (
+            <>
+              {" "}
+              <span className={dark ? "text-white/45" : "text-faint"}>{muted}</span>
+            </>
+          )}
         </h2>
       </Reveal>
       {description && (
         <Reveal delay={0.12}>
-          <p className="mt-4 max-w-2xl text-base text-muted text-pretty">
+          <p
+            className={`mt-5 max-w-2xl text-base text-pretty md:text-[17px] ${
+              dark ? "text-white/70" : "text-muted"
+            }`}
+          >
             {description}
           </p>
         </Reveal>

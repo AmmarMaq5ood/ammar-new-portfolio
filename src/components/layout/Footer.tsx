@@ -2,102 +2,226 @@
 
 import { portfolio } from "@/data/portfolio";
 import { Reveal } from "@/components/ui/Reveal";
+import { ArrowButton, PillLabel } from "@/components/ui/Asterisk";
 
 const { name, title, contact } = portfolio.meta;
 
-function LinkedInIcon({ className = "" }: { className?: string }) {
+/** The grey info tile from the reference: label top, value pinned to the bottom. */
+function Tile({
+  label,
+  children,
+}: {
+  label: string;
+  children: React.ReactNode;
+}) {
   return (
-    <svg viewBox="0 0 24 24" aria-hidden className={className} fill="currentColor">
-      <path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29ZM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.72v20.55C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.72C24 .77 23.2 0 22.22 0Z" />
-    </svg>
-  );
-}
-
-function GitHubIcon({ className = "" }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden className={className} fill="currentColor">
-      <path d="M12 .5C5.37.5 0 5.87 0 12.5c0 5.3 3.44 9.8 8.21 11.39.6.11.82-.26.82-.58v-2.03c-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.75.08-.73.08-.73 1.2.09 1.84 1.24 1.84 1.24 1.07 1.84 2.81 1.31 3.5 1 .11-.78.42-1.31.76-1.61-2.67-.3-5.47-1.34-5.47-5.96 0-1.32.47-2.4 1.24-3.24-.12-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.24a11.5 11.5 0 0 1 6 0c2.29-1.56 3.3-1.24 3.3-1.24.66 1.66.24 2.88.12 3.18.77.84 1.24 1.92 1.24 3.24 0 4.63-2.81 5.65-5.49 5.95.43.37.82 1.1.82 2.22v3.29c0 .32.21.7.82.58A12.01 12.01 0 0 0 24 12.5C24 5.87 18.63.5 12 .5Z" />
-    </svg>
+    <div className="flex min-h-[150px] flex-col justify-between rounded-sm bg-tile p-5 md:min-h-[180px]">
+      <span className="text-[12px] text-muted">{label}</span>
+      <div className="font-display text-[15px] font-bold uppercase leading-snug tracking-tight text-ink">
+        {children}
+      </div>
+    </div>
   );
 }
 
 export function Footer() {
+  const navItems = [
+    { id: "process", label: portfolio.process.eyebrow },
+    ...portfolio.categories.map((c) => ({ id: c.id, label: c.short })),
+    { id: "contact", label: "Contact" },
+  ];
+
   return (
-    <footer
-      id="contact"
-      className="scroll-mt-24 border-t border-line bg-surface px-6 pt-24 pb-10 md:px-10 md:pt-32"
-    >
-      <div className="mx-auto max-w-6xl">
-        <Reveal>
-          <p className="annotation">Final stage / contact</p>
-        </Reveal>
-        <Reveal delay={0.06}>
-          <h2 className="font-display mt-5 max-w-3xl text-4xl leading-[1.02] font-extrabold tracking-tight text-balance md:text-6xl">
-            Have a project that needs{" "}
-            <span className="text-violet">serious engineering?</span>
-          </h2>
-        </Reveal>
+    <>
+      {/* ── Contact ─────────────────────────────────────────────────── */}
+      <section
+        id="contact"
+        className="scroll-mt-24 border-t border-line bg-paper px-4 py-20 md:px-8 md:py-28"
+      >
+        <div className="mx-auto max-w-7xl">
+          <Reveal>
+            <div className="flex items-baseline justify-between gap-4">
+              <p className="font-display text-[13px] font-bold uppercase tracking-tight">
+                {name}
+                <sup className="ml-0.5 text-[8px]">®</sup>
+              </p>
+              <p className="annotation">©{new Date().getFullYear()} · scroll to explore</p>
+            </div>
+          </Reveal>
+          <Reveal delay={0.05}>
+            <h2 className="headline mt-6 text-[clamp(3.25rem,12vw,10.5rem)]">
+              Contact me
+            </h2>
+          </Reveal>
 
-        <Reveal delay={0.12}>
-          <div className="mt-10 flex flex-wrap items-center gap-3">
-            <a
-              href={`mailto:${contact.email}`}
-              className="inline-flex items-center gap-2 rounded-full bg-ink px-7 py-3.5 text-sm font-semibold text-paper transition-colors duration-300 hover:bg-violet"
-            >
-              {contact.email}
-            </a>
-            {contact.github && (
-              <a
-                href={contact.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-full border border-line px-6 py-3.5 text-sm font-semibold transition-colors duration-300 hover:border-violet hover:text-violet"
-              >
-                <GitHubIcon className="h-4 w-4" />
-                GitHub
-              </a>
-            )}
-            {contact.linkedin && (
-              <a
-                href={contact.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-full border border-line px-6 py-3.5 text-sm font-semibold transition-colors duration-300 hover:border-violet hover:text-violet"
-              >
-                <LinkedInIcon className="h-4 w-4" />
-                LinkedIn
-              </a>
-            )}
+          <div className="mt-12 grid gap-10 md:mt-16 lg:grid-cols-[minmax(0,1fr)_minmax(0,560px)] lg:gap-16">
+            <div>
+              <Reveal>
+                <PillLabel>Ready to start?</PillLabel>
+              </Reveal>
+              <Reveal delay={0.06}>
+                <h3 className="headline mt-5 text-[clamp(2.4rem,6vw,4.5rem)]">
+                  Get in
+                  <br />
+                  touch
+                </h3>
+              </Reveal>
+              <Reveal delay={0.1}>
+                <p className="mt-5 max-w-md text-base text-muted text-pretty">
+                  Remote, async-friendly, used to international clients and
+                  small teams that move fast. Send the brief, or just the
+                  problem.
+                </p>
+              </Reveal>
+              <Reveal delay={0.14}>
+                <div className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-4">
+                  <ArrowButton href={`mailto:${contact.email}`}>Send an email</ArrowButton>
+                  {contact.resume && (
+                    <ArrowButton href={contact.resume} external>
+                      Download CV
+                    </ArrowButton>
+                  )}
+                </div>
+              </Reveal>
+            </div>
+
+            <Reveal delay={0.1}>
+              <div className="grid grid-cols-2 gap-3">
+                <Tile label="Based in:">
+                  Lahore, Pakistan
+                  <br />
+                  Remote worldwide
+                </Tile>
+                <Tile label="Availability:">
+                  Open to remote
+                  <br />
+                  full-time roles
+                </Tile>
+                <Tile label="Email:">
+                  <a href={`mailto:${contact.email}`} className="break-all text-[12px] normal-case hover:text-accent sm:text-[14px]">
+                    {contact.email}
+                  </a>
+                </Tile>
+                <Tile label="Elsewhere:">
+                  {contact.linkedin && (
+                    <a
+                      href={contact.linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block hover:text-accent"
+                    >
+                      LinkedIn ↗
+                    </a>
+                  )}
+                  {contact.github && (
+                    <a
+                      href={contact.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block hover:text-accent"
+                    >
+                      GitHub ↗
+                    </a>
+                  )}
+                </Tile>
+              </div>
+            </Reveal>
           </div>
-        </Reveal>
-
-        {/* Bottom bar — Name | Profession | LinkedIn Logo */}
-        <div className="mt-24 flex flex-col items-center justify-center gap-3 border-t border-line pt-8 text-sm text-muted sm:flex-row sm:gap-5">
-          <span className="font-display font-semibold text-ink">{name}</span>
-          <span aria-hidden className="hidden text-line sm:inline">
-            |
-          </span>
-          <span>{title}</span>
-          <span aria-hidden className="hidden text-line sm:inline">
-            |
-          </span>
-          {contact.linkedin && (
-            <a
-              href={contact.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="LinkedIn profile"
-              className="text-muted transition-colors hover:text-violet"
-            >
-              <LinkedInIcon className="h-5 w-5" />
-            </a>
-          )}
         </div>
+      </section>
 
-        <p className="mt-6 text-center font-mono text-[11px] text-muted/70">
-          © {new Date().getFullYear()} {name} · Built with Next.js
-        </p>
-      </div>
-    </footer>
+      {/* ── Footer ──────────────────────────────────────────────────── */}
+      <footer className="border-t border-line bg-paper px-4 pt-16 pb-8 md:px-8 md:pt-20">
+        <div className="mx-auto max-w-7xl">
+          <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
+            <div>
+              <p className="max-w-sm text-base text-muted text-pretty">
+                Focused on shipping AI agents, automations and full-stack
+                products that{" "}
+                <span className="font-semibold text-ink">
+                  hold up in production
+                </span>
+                , built with coding agents and real engineering around them.
+              </p>
+              <p className="mt-6 text-sm text-muted">
+                <a href={`mailto:${contact.email}`} className="hover:text-accent">
+                  {contact.email}
+                </a>
+              </p>
+
+              <div className="mt-10 grid grid-cols-2 gap-8 text-sm sm:max-w-sm">
+                <div>
+                  <p className="text-[11px] text-muted">Navigation</p>
+                  <ul className="mt-3 space-y-2">
+                    {navItems.map((n) => (
+                      <li key={n.id}>
+                        <a href={`#${n.id}`} className="hover:text-accent">
+                          {n.label}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div>
+                  <p className="text-[11px] text-muted">Elsewhere</p>
+                  <ul className="mt-3 space-y-2">
+                    {contact.linkedin && (
+                      <li>
+                        <a
+                          href={contact.linkedin}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="hover:text-accent"
+                        >
+                          LinkedIn <span className="text-muted">↗</span>
+                        </a>
+                      </li>
+                    )}
+                    {contact.github && (
+                      <li>
+                        <a
+                          href={contact.github}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="hover:text-accent"
+                        >
+                          GitHub <span className="text-muted">↗</span>
+                        </a>
+                      </li>
+                    )}
+                    {contact.resume && (
+                      <li>
+                        <a
+                          href={contact.resume}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="hover:text-accent"
+                        >
+                          CV (PDF) <span className="text-muted">↗</span>
+                        </a>
+                      </li>
+                    )}
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div className="flex items-end justify-start lg:justify-end">
+              <p className="font-display text-[clamp(3rem,9.5vw,7.5rem)] leading-none font-black tracking-[-0.04em]">
+                {name.split(" ")[0]}
+                <sup className="ml-1 align-top text-[0.3em] font-semibold">®</sup>
+              </p>
+            </div>
+          </div>
+
+          <div className="mt-14 flex flex-col gap-2 border-t border-line pt-6 text-[12px] text-muted sm:flex-row sm:items-center sm:justify-between">
+            <span>
+              © {new Date().getFullYear()} {name} · {title}
+            </span>
+            <span>Built with Next.js and Claude Code</span>
+          </div>
+        </div>
+      </footer>
+    </>
   );
 }

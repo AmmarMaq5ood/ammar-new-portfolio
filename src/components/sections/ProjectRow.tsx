@@ -18,34 +18,36 @@ export function ProjectRow({ project, code, index }: ProjectRowProps) {
   const live = project.links?.live;
   const inner = (
     <>
-      <span className="font-mono text-xs text-muted transition-colors group-hover:text-violet">
+      <span className="font-mono text-xs text-muted transition-colors group-hover:text-accent">
         {code}·{String(index + 1).padStart(2, "0")}
       </span>
 
       <span className="block">
-        <span className="font-display block text-lg leading-snug font-bold transition-colors group-hover:text-violet md:text-xl">
+        <span className="font-display block text-xl leading-snug font-bold uppercase tracking-tight transition-colors group-hover:text-accent md:text-2xl">
           {project.title}
         </span>
-        <span className="mt-0.5 block text-sm text-muted">
-          {project.tagline}
-        </span>
+        <span className="mt-1 block text-sm text-muted">{project.tagline}</span>
       </span>
 
-      <span className="hidden text-right font-mono text-[11px] leading-relaxed text-muted lg:block">
+      <span className="hidden text-right text-[12px] leading-relaxed text-muted lg:block">
         {project.techStack.join(" · ")}
       </span>
 
       <span
         aria-hidden
-        className="justify-self-end self-center text-muted transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-violet"
+        className={`inline-flex h-7 w-7 items-center justify-center self-center justify-self-end text-sm transition-all duration-300 ${
+          live
+            ? "bg-tile text-ink group-hover:bg-accent group-hover:text-white"
+            : "text-line"
+        }`}
       >
-        {live ? "↗" : ""}
+        {live ? "↗" : "—"}
       </span>
     </>
   );
 
   const rowClasses =
-    "group grid grid-cols-[3.25rem_minmax(0,1fr)_1.25rem] items-baseline gap-x-3 border-b border-line py-5 transition-colors duration-200 lg:grid-cols-[4rem_minmax(0,1fr)_minmax(0,300px)_1.25rem] lg:gap-x-6";
+    "group grid grid-cols-[3.25rem_minmax(0,1fr)_1.75rem] items-baseline gap-x-3 border-b border-line py-5 transition-colors duration-200 lg:grid-cols-[4rem_minmax(0,1fr)_minmax(0,300px)_1.75rem] lg:gap-x-6";
 
   if (!live) {
     return <div className={rowClasses}>{inner}</div>;

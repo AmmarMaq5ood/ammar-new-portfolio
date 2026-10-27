@@ -57,7 +57,7 @@ export function Reveal({
       variants={buildVariants(direction, reduced)}
       initial="hidden"
       whileInView="show"
-      viewport={{ once: !repeat, amount: 0.25, margin: "0px 0px -10% 0px" }}
+      viewport={{ once: !repeat, amount: 0.15, margin: "0px 0px -5% 0px" }}
       transition={{
         duration: 0.8,
         delay,

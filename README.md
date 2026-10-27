@@ -1,10 +1,11 @@
 # Ammar Maqsood — Portfolio
 
-High-performance, animated portfolio. Interactive WebGL hero, scroll-reveal
-showcase sections, and a single typed content source.
+Editorial, single-page portfolio: orange hero, case studies with screenshots and
+hand-drawn schematics, a "How I build" section on the AI-native workflow, and a
+single typed content source.
 
 **Stack:** Next.js 16 (App Router) · React 19 · TypeScript · Tailwind CSS v4 ·
-Framer Motion · React Three Fiber / drei · Lenis smooth scroll.
+Framer Motion.
 
 ## Local development
 
@@ -22,47 +23,38 @@ Node **>= 20** is required (see `.nvmrc` / `package.json` → `engines`).
 
 All content lives in one typed file — no component edits needed to add work:
 
-- [`src/data/portfolio.ts`](src/data/portfolio.ts) — name, title, branding, and
-  every category/project. Types in [`src/lib/types.ts`](src/lib/types.ts).
-- Each category's `uiTemplate` (`code-to-ui-reveal` | `terminal-data-flow` |
-  `interactive-node-flowchart`) selects its themed visual automatically.
+- [`src/data/portfolio.ts`](src/data/portfolio.ts) — name, title, contact,
+  the "How I build" section (`process`: stats, steps, toolbelt, tool strip)
+  and every category/project. Types in [`src/lib/types.ts`](src/lib/types.ts).
+- Each category's `layout` picks how its projects render:
+  `cases` (full case studies), `cards` (dark tile grid), `ledger` (one-line rows).
+- A project with `images` shows a screenshot gallery; one with `diagram`
+  shows the matching schematic from
+  [`src/components/visuals/FlowDiagram.tsx`](src/components/visuals/FlowDiagram.tsx).
+- Screenshots live under [`public/projects/`](public/projects/).
+- Set `meta.portrait` to a path under `public/` to show a photo in the hero card.
 
-### Brand font
+## CV
 
-Headings use **Momo Trust Display**, falling back to **Sora** until the font
-file is supplied. Drop `momo-trust-display.woff2` / `.woff` into
-[`public/fonts/`](public/fonts/) — the `@font-face` is already wired.
+The CV is an HTML document rendered to PDF with headless Chrome:
 
-### Contact details
-
-Email, GitHub and LinkedIn live in `meta.contact` in
-[`src/data/portfolio.ts`](src/data/portfolio.ts); the footer renders them.
+- Source: [`cv/Ammar-Maqsood-CV.html`](cv/Ammar-Maqsood-CV.html)
+- Build: `powershell -ExecutionPolicy Bypass -File cv/build.ps1`
+  (writes `cv/Ammar-Maqsood-CV.pdf` and copies it to `public/` for the
+  "Download CV" links).
 
 ## Deploy to Vercel
 
 This repo is zero-config for Vercel (framework auto-detected as Next.js).
 
-1. Push the repo to GitHub/GitLab/Bitbucket.
-2. On [vercel.com/new](https://vercel.com/new), import the repository.
-3. Build settings are auto-detected — no overrides needed:
-   - Build command: `next build`
-   - Output: `.next`
-   - Install: `npm install`
-4. **Environment variables** (Project → Settings → Environment Variables):
-   - `NEXT_PUBLIC_SITE_URL` — *optional*. Leave unset to auto-use the Vercel
-     production domain; set it to your custom domain once attached
-     (e.g. `https://ammarmaqsood.com`). Drives `metadataBase`, Open Graph
-     URLs, `robots.txt`, and `sitemap.xml`.
-5. Deploy. Production builds run from the default branch (`master`).
-
-### Or deploy from the CLI
-
-```bash
-npm i -g vercel
-vercel          # preview deployment
-vercel --prod   # production deployment
-```
+1. Push the repo to GitHub.
+2. On [vercel.com/new](https://vercel.com/new), import the repository, or
+   point the existing `ammarmaqsood` project at this repo so the URL stays
+   `ammarmaqsood.vercel.app`.
+3. Build settings are auto-detected (`next build`, output `.next`).
+4. **Environment variables** (optional): `NEXT_PUBLIC_SITE_URL` — leave unset
+   to use the Vercel production domain; set it once a custom domain is attached.
+   Drives `metadataBase`, Open Graph URLs, `robots.txt` and `sitemap.xml`.
 
 SEO routes are generated automatically: `/robots.txt`, `/sitemap.xml`.
-Security headers (`X-Content-Type-Options`, `X-Frame-Options`,
-`Referrer-Policy`, `Permissions-Policy`) are set in `next.config.ts`.
+Security headers are set in `next.config.ts`.
