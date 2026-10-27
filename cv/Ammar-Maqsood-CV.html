@@ -258,7 +258,7 @@
             <li>Designed and shipped a <strong>72-node n8n AI agent</strong> for a mortgage lender: transcribes every sales call with Whisper, summarises it with GPT-4o against the full contact history, updates opportunities across pipelines, posts notes and drafts follow-up and nurture emails. Live since October 2026, iterated v2 → v6.</li>
             <li>Built an <strong>AI weekly reporting analyst</strong> (PHP 8, Claude / OpenAI, SQLite) that narrates CRM metrics for every client, with a hard guardrail: the model only narrates numbers computed in code.</li>
             <li>Built <strong>Stale Lead Reviver</strong> (Node.js, React, Supabase, GPT-4o): finds dormant contacts, drafts re-engagement messages in the client's voice, human approval queue, AI reply classification.</li>
-            <li>Delivered the integrations around the CRM: <strong>FedEx shipping</strong> with tracking write-back, <strong>ZoomInfo enrichment</strong>, <strong>Make.com → Smartsheet</strong> sync, an e-signature → certificate pipeline, an affiliate revenue-share dashboard, a <strong>LinkedIn outreach engine</strong> (Node.js, Postgres, Playwright) and a review aggregator (React 19, Express 5, n8n, Apify).</li>
+            <li>Delivered the integrations around the CRM: <strong>FedEx shipping</strong> with tracking write-back, <strong>ZoomInfo enrichment</strong>, <strong>Make.com → Smartsheet</strong> sync, an e-signature → certificate pipeline, an affiliate revenue-share dashboard and a review aggregator (React 19, Express 5, n8n, Apify).</li>
             <li>Run an <strong>AI-native workflow</strong> across the team's repos: context files, custom skills, MCP servers and token budgeting, so agents stay within limits and output stays reviewable. Own delivery: GitHub Actions → VPS (nginx, pm2), Docker, Vercel; docs and a changelog line with every feature.</li>
             <li>Also: prompt-engineered chatbots and voice agents in GoHighLevel, a custom Student Management System, WordPress builds and migrations.</li>
           </ul>
@@ -388,9 +388,9 @@
         <div class="s">React 19 · Express 5 · Drizzle · n8n · Apify</div>
       </div>
       <div class="proj">
-        <div class="t">LinkedIn Outreach Engine</div>
-        <div class="d">CRM smartlist in; a Playwright worker on a clean residential IP sends paced connection requests and follow-ups; replies come back as warm leads. Caps, work-hours gating, IP-drift auto-pause.</div>
-        <div class="s">Node.js · PostgreSQL · Playwright · Docker</div>
+        <div class="t">FedEx × CRM shipping</div>
+        <div class="d">Pulls validated contacts from the CRM, creates FedEx shipments with the right rate and signature options, prints labels and writes the tracking number back onto the contact. No CSVs, no address matching.</div>
+        <div class="s">PHP · FedEx Ship API · OAuth 2.0 · GoHighLevel API</div>
       </div>
       <div class="proj">
         <div class="t">TunnTunn app</div>
