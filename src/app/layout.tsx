@@ -27,7 +27,36 @@ const plexMono = IBM_Plex_Mono({
 const { name, title } = portfolio.meta;
 
 const description =
-  "AI-native full-stack developer: production Node.js / React apps, AI agents on n8n and Make.com, and CRM automations, built with Claude Code, Codex and Cursor.";
+  "AI-native full-stack developer. Production AI agents, automations and Node.js / React products, built with Claude Code, Codex and Cursor and shipped with CI.";
+
+const { contact } = portfolio.meta;
+
+/** Person schema for search engines and link previews. */
+const personJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name,
+  jobTitle: title,
+  description,
+  url: siteUrl,
+  email: `mailto:${contact.email}`,
+  sameAs: [contact.linkedin, contact.github].filter(Boolean),
+  knowsAbout: [
+    "AI agents",
+    "n8n",
+    "Make.com",
+    "Claude Code",
+    "Node.js",
+    "React",
+    "Next.js",
+    "TypeScript",
+    "PHP",
+    "Python",
+    "GoHighLevel",
+    "WordPress",
+  ],
+  address: { "@type": "PostalAddress", addressLocality: "Lahore", addressCountry: "PK" },
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -54,17 +83,22 @@ export const metadata: Metadata = {
   authors: [{ name }],
   openGraph: {
     title: `${name} — ${title}`,
-    description:
-      "Production AI agents, automations and full-stack products, built with coding agents and shipped with CI.",
+    description,
     url: "/",
     siteName: name,
-    type: "website",
+    type: "profile",
+    locale: "en_US",
+    firstName: name.split(" ")[0],
+    lastName: name.split(" ").slice(1).join(" "),
   },
   twitter: {
     card: "summary_large_image",
     title: `${name} — ${title}`,
     description,
   },
+  applicationName: name,
+  creator: name,
+  category: "technology",
   robots: {
     index: true,
     follow: true,
@@ -85,7 +119,13 @@ export default function RootLayout({
       lang="en"
       className={`${archivo.variable} ${inter.variable} ${plexMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full bg-paper text-ink">{children}</body>
+      <body className="min-h-full bg-paper text-ink">
+        {children}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+        />
+      </body>
     </html>
   );
 }
