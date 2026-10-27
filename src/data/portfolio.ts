@@ -546,6 +546,46 @@ export const portfolio: Portfolio = {
           techStack: ["WordPress", "JavaScript", "Custom animations"],
           links: { live: "https://www.massinteract.com/" },
         },
+        {
+          id: "wp-biznesmarket",
+          title: "BiznesMarket",
+          tagline:
+            "Ukrainian business portal on the AdForest theme: business-for-sale listings, franchises, crypto exchanges and loans, multilingual",
+          techStack: ["WordPress", "AdForest child theme", "WPML", "WooCommerce", "Directory listings"],
+          links: { live: "https://biznesmarket.com.ua/" },
+        },
+        {
+          id: "wp-inchub",
+          title: "IncHub",
+          tagline:
+            "UAE corporate-services advisory: service pages, a setup-cost calculator, consultation forms, case studies and a guides library",
+          techStack: ["WordPress", "Gravity Forms", "Custom forms plugin", "WP Rocket"],
+          links: { live: "https://inchub.ae/" },
+        },
+        {
+          id: "wp-decorbox",
+          title: "Decor Box Studio",
+          tagline:
+            "Dubai wedding decor: tiered packages, gallery, FAQs and enquiries, with a custom Elementor widgets plugin",
+          techStack: ["WordPress", "Elementor Pro", "Custom widgets plugin", "WhatsApp chat"],
+          links: { live: "https://decorboxstudio.com/" },
+        },
+        {
+          id: "wp-bluekryon",
+          title: "BlueKryon LLC",
+          tagline:
+            "Business-setup consultancy in Dubai: company formation, PRO and visa services, consultation funnels",
+          techStack: ["WordPress", "BizMaster child theme", "Elementor", "Contact Form 7"],
+          links: { live: "https://bluekryonllc.com/" },
+        },
+        {
+          id: "wp-prism",
+          title: "PRISM Events & Tours",
+          tagline:
+            "Event production company in Karachi: services, portfolio, event gallery, proposal requests and newsletter",
+          techStack: ["WordPress", "Elementor", "Hello Elementor", "WhatsApp chat"],
+          links: { live: "https://prismeventsandtours.com/" },
+        },
       ],
     },
   ],
