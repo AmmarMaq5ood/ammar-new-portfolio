@@ -11,6 +11,7 @@ export const portfolio: Portfolio = {
     title: "AI-native full-stack developer",
     intro:
       "Four years building for the web, now working AI-native: I plan in specs, build with Claude Code, Codex and Cursor, and ship Node.js / React products, n8n and Make.com agents, and CRM automations that run in production for real clients.",
+    portrait: "/portrait/ammar-maqsood.png",
     branding: {
       primaryFont: "Archivo",
       colors: {
@@ -388,14 +389,6 @@ export const portfolio: Portfolio = {
         "Glue that runs unattended: webhooks, schedulers, third-party APIs and CRM workflows that move data without a human in the loop.",
       layout: "cards",
       projects: [
-        {
-          id: "li-engine",
-          title: "LinkedIn Outreach Engine",
-          tagline:
-            "Leads flow in from a CRM smartlist; a Playwright worker on a clean residential IP sends paced connection requests and follow-ups, detects replies and pushes warm leads back into the CRM.",
-          keyFeatures: ["IP-drift auto-pause, daily caps, work-hours gating, jittered human pauses"],
-          techStack: ["Node.js", "PostgreSQL", "Docker", "Playwright", "GoHighLevel webhooks"],
-        },
         {
           id: "fedex-shipping",
           title: "FedEx × CRM shipping",

@@ -102,16 +102,18 @@ export function Hero() {
         {portrait && (
           <div
             aria-hidden
-            className="pointer-events-none absolute inset-x-0 top-[20%] bottom-0 z-[5] sm:top-[12%] md:left-[16%] md:right-[22%] md:top-[7%]"
+            className="pointer-events-none absolute inset-x-0 top-[18%] bottom-0 z-[5] sm:top-[12%] md:left-[6%] md:right-[12%] md:top-[7%] lg:left-[16%] lg:right-[22%]"
           >
             <Image
               src={portrait}
               alt=""
               fill
               priority
-              sizes="(min-width: 768px) 62vw, 100vw"
-              className="object-contain object-bottom"
+              sizes="(min-width: 1024px) 62vw, (min-width: 768px) 82vw, 100vw"
+              className="object-cover object-top sm:object-contain sm:object-bottom"
             />
+            {/* Fade the shirt into the orange so the name always sits on colour */}
+            <div className="absolute inset-x-0 bottom-0 h-[44%] bg-gradient-to-t from-accent via-accent/75 to-transparent sm:h-[36%]" />
           </div>
         )}
 
@@ -129,7 +131,7 @@ export function Hero() {
             <motion.a
               variants={rise}
               href={`#${featured.id}`}
-              className="group block w-[220px] shrink-0 rounded-sm bg-white p-2 text-ink shadow-[0_20px_50px_rgba(0,0,0,0.18)] transition-transform duration-500 hover:-translate-y-1 sm:w-[240px] md:w-[270px]"
+              className="group hidden w-[220px] shrink-0 rounded-sm bg-white p-2 text-ink shadow-[0_20px_50px_rgba(0,0,0,0.18)] transition-transform duration-500 hover:-translate-y-1 sm:block sm:w-[240px] md:w-[270px]"
             >
               <div className="relative aspect-[4/3] overflow-hidden rounded-[2px] bg-paper">
                 <Image
