@@ -50,10 +50,10 @@ This repo is zero-config for Vercel (framework auto-detected as Next.js).
 1. Push the repo to GitHub.
 2. On [vercel.com/new](https://vercel.com/new), import the repository, or
    point the existing `ammarmaqsood` project at this repo so the URL stays
-   `ammarmaqsood.vercel.app`.
+   `ammar-maqsood.vercel.app`.
 3. Build settings are auto-detected (`next build`, output `.next`).
 4. **Environment variables**: set `NEXT_PUBLIC_SITE_URL` to the public origin
-   (`https://ammarmaqsood.vercel.app`, or the custom domain once attached). It
+   (`https://ammar-maqsood.vercel.app`, or the custom domain once attached). It
    drives `metadataBase`, so the Open Graph and Twitter image URLs in link
    previews are absolute. Without it the build falls back to Vercel's
    `VERCEL_PROJECT_PRODUCTION_URL`, which only exists when the project exposes
