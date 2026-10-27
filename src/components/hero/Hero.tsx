@@ -32,17 +32,42 @@ const rise: Variants = {
   },
 };
 
-/** "+" marks where the grid lines meet, as in the reference. */
-function Crosshairs() {
+/**
+ * The schematic grid from the reference: three vertical lines that start
+ * below the nav row, two horizontal lines, and "+" marks at every line end
+ * and crossing. Drawn as elements so the marks always sit on the lines.
+ */
+const V = [25, 50, 75];
+const H = [34, 62];
+const TOP = 9;
+const BOTTOM = 96;
+const LEFT = 2;
+const RIGHT = 98;
+
+function HeroGrid() {
   const marks: Array<[number, number]> = [];
-  for (const x of [25, 50, 75]) for (const y of [2.5, 33.33, 66.66, 97.5]) marks.push([x, y]);
-  for (const y of [33.33, 66.66]) for (const x of [2.5, 97.5]) marks.push([x, y]);
+  for (const x of V) for (const y of [TOP, ...H, BOTTOM]) marks.push([x, y]);
+  for (const y of H) for (const x of [LEFT, RIGHT]) marks.push([x, y]);
   return (
     <div aria-hidden className="pointer-events-none absolute inset-0">
+      {V.map((x) => (
+        <span
+          key={`v${x}`}
+          className="absolute w-px bg-white/20"
+          style={{ left: `${x}%`, top: `${TOP}%`, bottom: `${100 - BOTTOM}%` }}
+        />
+      ))}
+      {H.map((y) => (
+        <span
+          key={`h${y}`}
+          className="absolute h-px bg-white/20"
+          style={{ top: `${y}%`, left: `${LEFT}%`, right: `${100 - RIGHT}%` }}
+        />
+      ))}
       {marks.map(([x, y]) => (
         <span
           key={`${x}-${y}`}
-          className="absolute h-3 w-3 -translate-x-1/2 -translate-y-1/2 text-white/70"
+          className="absolute h-3 w-3 -translate-x-1/2 -translate-y-1/2 text-white/80"
           style={{ left: `${x}%`, top: `${y}%` }}
         >
           <span className="absolute top-1/2 left-0 h-px w-full -translate-y-1/2 bg-current" />
@@ -60,9 +85,9 @@ export function Hero() {
         variants={container}
         initial="hidden"
         animate="show"
-        className="hero-grid relative flex min-h-[min(calc(100svh-1.5rem),980px)] flex-col overflow-hidden rounded-md bg-accent text-white"
+        className="relative flex min-h-[min(calc(100svh-1.5rem),980px)] flex-col overflow-hidden rounded-md bg-accent text-white"
       >
-        <Crosshairs />
+        <HeroGrid />
 
         {/* Ghost surname — the watermark behind everything */}
         <div
@@ -73,10 +98,10 @@ export function Hero() {
         </div>
 
         {/* Top row: tagline + featured card */}
-        <div className="relative z-10 flex flex-col gap-8 px-5 pt-24 sm:flex-row sm:items-start sm:justify-between md:px-10 md:pt-32">
+        <div className="relative z-10 flex flex-col gap-8 px-5 pt-28 sm:flex-row sm:items-start sm:justify-between md:px-10 md:pt-36">
           <motion.p
             variants={rise}
-            className="max-w-[300px] text-[13px] font-medium leading-[1.5] tracking-[0.04em] uppercase md:max-w-[340px] md:text-sm"
+            className="max-w-[280px] text-[13px] font-medium leading-[1.5] tracking-[0.04em] uppercase md:max-w-[300px] md:text-sm"
           >
             I build AI agents, automations and full-stack products, with coding
             agents doing the typing and real engineering around them.

@@ -131,7 +131,7 @@ export const portfolio: Portfolio = {
       },
       {
         label: "Frontend",
-        items: ["React", "Next.js", "Vite", "Tailwind CSS", "shadcn/ui", "Framer Motion", "React Native"],
+        items: ["React", "Next.js", "Vite", "Tailwind CSS", "shadcn/ui", "Framer Motion", "Redux", "React Native"],
       },
       {
         label: "Data",
@@ -139,11 +139,39 @@ export const portfolio: Portfolio = {
       },
       {
         label: "Infra & delivery",
-        items: ["Git & GitHub", "GitHub Actions", "Docker", "pm2", "nginx", "VPS", "Vercel", "Playwright", "FFmpeg"],
+        items: [
+          "Git & GitHub",
+          "GitHub Actions",
+          "Docker",
+          "Kubernetes",
+          "Google Cloud (App Engine, Cloud Functions, Pub/Sub, BigQuery)",
+          "Firebase (Auth, Cloud Messaging)",
+          "AWS S3",
+          "pm2",
+          "nginx",
+          "VPS",
+          "Vercel",
+          "Playwright",
+          "FFmpeg",
+        ],
       },
       {
         label: "CRM & integrations",
-        items: ["GoHighLevel API & workflows", "ZoomInfo", "Apollo", "FedEx API", "Smartsheet", "Google Places", "Apify"],
+        items: [
+          "GoHighLevel API & workflows",
+          "HubSpot",
+          "Salesforce",
+          "Follow Up Boss",
+          "Pipedrive",
+          "Zoho",
+          "Microsoft Dynamics",
+          "ZoomInfo",
+          "Apollo",
+          "FedEx API",
+          "Smartsheet",
+          "Google Places",
+          "Apify",
+        ],
       },
     ],
   },
@@ -418,6 +446,16 @@ export const portfolio: Portfolio = {
           techStack: ["GoHighLevel workflows", "Custom fields", "Trigger pipelines"],
         },
         {
+          id: "arrivy-crm-integrations",
+          title: "CRM connectors for a field-service platform",
+          tagline:
+            "At Arrivy: HubSpot, Salesforce, Follow Up Boss, Pipedrive, Zoho and Microsoft Dynamics connectors built as Google Cloud Functions with OAuth 2.0, syncing customers and jobs both ways into the platform's Python APIs.",
+          keyFeatures: [
+            "Plus Firebase Cloud Messaging push notifications, Pub/Sub and BigQuery jobs, and React / Redux front-end work",
+          ],
+          techStack: ["Python", "Google Cloud Functions", "OAuth 2.0", "Pub/Sub", "Firebase", "React", "Redux"],
+        },
+        {
           id: "chat-voice-agents",
           title: "AI chatbots & voice agents",
           tagline:
@@ -477,6 +515,17 @@ export const portfolio: Portfolio = {
           tagline: "Modern front-end architecture, web and mobile",
           techStack: ["React", "Node.js", "API integration"],
           links: { live: "https://tunntunn.com/" },
+        },
+        {
+          id: "tunntunn-app",
+          title: "TunnTunn mobile app",
+          tagline:
+            "Community app on iOS and Android: stories, events, marketplace, chat and leaderboards. Upgraded to React Native 0.83 and the New Architecture; release 1.4.0 on both stores",
+          techStack: ["React Native", "Redux Toolkit", "Firebase Auth", "AdMob", "AWS S3", "Codemagic CI"],
+          links: {
+            appStore: "https://apps.apple.com/us/app/id1574045168",
+            playStore: "https://play.google.com/store/apps/details?id=com.yc.tunntunn",
+          },
         },
         {
           id: "mern-uran",

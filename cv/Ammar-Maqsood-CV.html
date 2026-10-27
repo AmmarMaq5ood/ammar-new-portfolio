@@ -176,11 +176,17 @@
   .note strong { color: var(--ink); }
 
   /* ── Projects ─────────────────────────────────────────────────────── */
-  .projects { display: grid; grid-template-columns: 1fr 1fr; gap: 2.6mm; }
+  .projects { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2.4mm; }
+  .wide { margin-top: 0; margin-bottom: 3mm; }
+  .howrow { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 2.4mm; }
+  .howrow .card { margin: 0; padding: 2.2mm 2.6mm; }
+  .howrow .card strong { display: block; font-family: var(--display); font-size: 8pt; text-transform: uppercase; letter-spacing: 0.02em; margin-bottom: 1mm; color: var(--ink); }
+  .howrow .card p { font-size: 7pt; line-height: 1.38; color: var(--muted); margin: 0; }
+  .side .card:last-child { margin-bottom: 0; }
   .proj {
     border: 1px solid var(--line);
     border-radius: 2.2mm;
-    padding: 2.6mm 3mm;
+    padding: 2.2mm 2.8mm;
     break-inside: avoid;
     display: flex; flex-direction: column;
   }
@@ -188,10 +194,13 @@
   .proj .t .st { font-family: var(--mono); font-size: 6.4pt; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); font-weight: 500; white-space: nowrap; }
   .proj .t .st::before { content: ""; display: inline-block; width: 1.4mm; height: 1.4mm; border-radius: 50%; background: var(--gold); margin-right: 1.2mm; vertical-align: 0.1mm; }
   .proj .t .st.quiet::before { background: transparent; border: 1px solid var(--violet); }
-  .proj .d { font-size: 8.2pt; line-height: 1.42; color: var(--muted); margin-top: 0.9mm; flex: 1; }
-  .proj .s { font-family: var(--mono); font-size: 6.9pt; color: var(--violet); margin-top: 1.6mm; line-height: 1.4; }
+  .proj .d { font-size: 7.5pt; line-height: 1.42; color: var(--muted); margin-top: 0.9mm; flex: 1; }
+  .proj .s { font-family: var(--mono); font-size: 6.4pt; color: var(--violet); margin-top: 1.2mm; line-height: 1.4; }
+  .proj .s a { color: var(--ink); text-decoration: underline; text-decoration-color: var(--line); }
 
-  .sites { display: flex; flex-wrap: wrap; gap: 1mm 3.2mm; font-size: 8pt; line-height: 1.5; color: var(--muted); margin: 0; padding: 0; list-style: none; }
+  .sites { font-size: 7.6pt; line-height: 1.55; color: var(--muted); margin: 0; padding: 0; list-style: none; }
+  .sites li { display: inline; }
+  .sites li + li::before { content: " · "; color: var(--line); }
   .sites a { color: var(--ink); white-space: nowrap; }
   .sites span { white-space: nowrap; }
 
@@ -229,7 +238,7 @@
       <section>
         <div class="h"><span class="annotation">01 / Summary</span><b></b></div>
         <p class="summary">
-          Full-stack developer with <strong>4+ years</strong> shipping web and mobile products in <strong>Node.js, React, Next.js and PHP</strong>, now working AI-native: I plan in specs, build with <strong>Claude Code, Codex and Cursor</strong>, and ship production <strong>AI agents and automations</strong> on n8n, Make.com and custom OpenAI / Anthropic integrations. Former team lead who owns a product end to end, from requirements calls with international clients to CI/CD and the server it runs on.
+          Full-stack developer with <strong>4+ years</strong> shipping web and mobile products in <strong>Node.js, React, Next.js, PHP and Python</strong>, now working AI-native: I plan in specs, build with <strong>Claude Code, Codex and Cursor</strong>, and ship production <strong>AI agents and automations</strong> on n8n, Make.com and custom OpenAI / Anthropic integrations. Former team lead who owns a product end to end, from requirements calls with international clients to CI/CD and the server it runs on.
         </p>
       </section>
 
@@ -299,11 +308,9 @@
           <dt>Data</dt>
           <dd>PostgreSQL, Prisma, Drizzle, Supabase, MongoDB, SQLite, Zod</dd>
           <dt>Infra &amp; delivery</dt>
-          <dd>Git &amp; GitHub, GitHub Actions, Docker, pm2, nginx, VPS, Vercel, AWS, Firebase, Playwright, FFmpeg</dd>
+          <dd>Git &amp; GitHub, GitHub Actions, Docker, Kubernetes, Google Cloud (App Engine, Cloud Functions, Pub/Sub, BigQuery), Firebase (Auth, Cloud Messaging), AWS S3, pm2, nginx, VPS, Vercel, Playwright, FFmpeg</dd>
           <dt>CRM &amp; integrations</dt>
-          <dd>GoHighLevel API &amp; workflows, ZoomInfo, Apollo, FedEx, Smartsheet, Google Places, Apify</dd>
-          <dt>Ways of working</dt>
-          <dd>Agile / Scrum, Jira, Asana, Monday.com, Trello; remote and async with international clients</dd>
+          <dd>GoHighLevel, HubSpot, Salesforce, Follow Up Boss, Pipedrive, Zoho, Microsoft Dynamics, ZoomInfo, Apollo, FedEx, Smartsheet, Google Places, Apify</dd>
         </dl>
       </div>
     </aside>
@@ -314,7 +321,7 @@
 
 <!-- ═══════════════════════════════ PAGE 2 ═══════════════════════════════ -->
 <div class="page">
-  <div class="body" style="margin-top:0">
+  <div class="body" style="margin-top:0; flex: 0 0 auto">
     <div class="main">
       <section>
         <div class="h"><span class="annotation">02 / Experience, continued</span><b></b></div>
@@ -327,101 +334,92 @@
             <div class="dates">Sep 2022 – Aug 2023</div>
           </div>
           <ul class="bul">
-            <li>Built React Native mobile apps and Laravel / PHP + React web applications with third-party API integrations.</li>
-            <li>Contributed to Agile delivery through sprint planning and code reviews.</li>
+            <li>Built <strong>CRM connectors</strong> for the field-service platform as Google Cloud Functions with OAuth 2.0: <strong>HubSpot, Salesforce, Follow Up Boss, Pipedrive, Zoho and Microsoft Dynamics</strong>, syncing customers and jobs both ways into the platform&#8217;s Python APIs.</li>
+            <li>Developed <strong>Python backend APIs</strong> on Google App Engine (Pub/Sub, task queues, BigQuery) and <strong>React / Redux</strong> features across the web app and customer portal.</li>
+            <li>Shipped push notifications with <strong>Firebase Cloud Messaging</strong>; worked across GCP tooling including Kubernetes workloads and cloud functions.</li>
+            <li>Built React Native mobile apps and Laravel / PHP + React web applications with third-party API integrations, in Agile sprints with code reviews.</li>
           </ul>
         </div>
-      </section>
-
-      <section>
-        <div class="h"><span class="annotation">03 / Selected AI &amp; automation projects</span><b></b></div>
-        <div class="projects">
-          <div class="proj">
-            <div class="t">ProspectIQ <span class="st">In production</span></div>
-            <div class="d">Plain-words lead research: GPT reads the request, a research database answers, every lead gets a reason it fits, ticked leads are pushed into the CRM. Daily finders, credits, targeting, multi-client admin.</div>
-            <div class="s">Node.js · TypeScript · React · OpenAI · GoHighLevel API · GitHub Actions</div>
-          </div>
-          <div class="proj">
-            <div class="t">Call Processor Agent <span class="st">In production</span></div>
-            <div class="d">n8n agent for a mortgage lender: Whisper transcript, full-history GPT-4o summary, opportunity updates across pipelines, notes, follow-up and nurture email drafts. Idempotent, 72 nodes.</div>
-            <div class="s">n8n · GPT-4o · Whisper · GoHighLevel API</div>
-          </div>
-          <div class="proj">
-            <div class="t">Weekly Reporting Analyst <span class="st quiet">Pilot</span></div>
-            <div class="d">Monday-morning narrative report per CRM client. Metrics pulled and compared in PHP; Claude only narrates. Encrypted keys, idempotent weeks, mock mode.</div>
-            <div class="s">PHP 8 · SQLite · Anthropic API · OpenAI API</div>
-          </div>
-          <div class="proj">
-            <div class="t">Stale Lead Reviver</div>
-            <div class="d">Daily scan for dormant contacts, GPT-4o drafts in the client's brand voice, human approval queue, inbound webhook classifies replies and stops the sequence.</div>
-            <div class="s">Node.js · React · Supabase · OpenAI API</div>
-          </div>
-          <div class="proj">
-            <div class="t">ClipForge <span class="st quiet">Personal</span></div>
-            <div class="d">YouTube link → reviewed 9:16 clips with karaoke captions. yt-dlp, FFmpeg, Whisper word timestamps, GPT scoring with structured output; every API call metered (≈ $0.37 per hour of video).</div>
-            <div class="s">Node.js · Prisma · PostgreSQL · React · FFmpeg · Docker</div>
-          </div>
-          <div class="proj">
-            <div class="t">Review Aggregator <span class="st">In production</span></div>
-            <div class="d">Google reviews scraped through an n8n workflow and Apify, analysed in a React 19 dashboard. OpenAPI-first with generated hooks and Zod validators.</div>
-            <div class="s">React 19 · Express 5 · Drizzle · n8n · Apify</div>
-          </div>
-          <div class="proj">
-            <div class="t">LinkedIn Outreach Engine</div>
-            <div class="d">CRM smartlist in, paced connection requests and follow-ups out via a Playwright worker on a clean residential IP; replies pushed back as warm leads. Caps, work-hours gating, IP-drift auto-pause.</div>
-            <div class="s">Node.js · PostgreSQL · Playwright · Docker</div>
-          </div>
-          <div class="proj">
-            <div class="t">FitTrack AI <span class="st quiet">Personal</span></div>
-            <div class="d">Offline-first fitness PWA with a deterministic coach. 36 specification documents written first, then built phase by phase with coding agents.</div>
-            <div class="s">React · TypeScript · PWA · IndexedDB</div>
-          </div>
-        </div>
-      </section>
-
-      <section>
-        <div class="h"><span class="annotation">04 / Earlier web work</span><b></b></div>
-        <ul class="sites"><li><a href="https://gogrow.ai">gogrow.ai</a></li><li><a href="https://stonewolfai.com">stonewolfai.com</a></li><li><a href="https://faasthub.com/faastdispatch">faasthub.com/faastdispatch</a></li><li><a href="https://www.ongeschrevenleven.nl">ongeschrevenleven.nl</a></li><li><a href="https://tunntunn.com">tunntunn.com</a><span> + mobile app</span></li><li><a href="https://uranlimited.com">uranlimited.com</a></li><li><a href="https://education.foodstreamnetwork.com">education.foodstreamnetwork.com</a></li><li><a href="https://connect.foodstreamnetwork.com">connect.foodstreamnetwork.com</a></li><li><a href="https://globalairentertainment.com">globalairentertainment.com</a></li><li><a href="https://enviropeel.com">enviropeel.com</a></li><li><a href="https://eversteadbusiness.co.uk">eversteadbusiness.co.uk</a></li><li><a href="https://www.massinteract.com">massinteract.com</a></li><li><a href="https://ramarion.com">ramarion.com</a></li><li><a href="https://catalystbreathworks.com">catalystbreathworks.com</a></li><li><a href="https://businessfinder.me">businessfinder.me</a></li><li><a href="https://rothys.com">rothys.com</a><span> (Shopify)</span></li><li><a href="https://progrowthadvisors.com">progrowthadvisors.com</a></li><li><a href="https://growcialmarketing.com">growcialmarketing.com</a></li></ul>
       </section>
     </div>
 
     <aside class="side">
       <div class="card edu">
-        <div class="h"><span class="annotation">Education</span><b></b></div>
+        <div class="h"><span class="annotation">Education &amp; certifications</span><b></b></div>
         <div class="role">Bachelor of Information Technology</div>
-        <div class="org">University of the Punjab, Lahore</div>
-        <div class="dates" style="margin-top:0.8mm">2018 – 2023</div>
-      </div>
-
-      <div class="card">
-        <div class="h"><span class="annotation">Certifications</span><b></b></div>
-        <dl class="kv">
-          <dt>Data Science &amp; Machine Learning</dt>
-          <dd>Nexskill</dd>
-          <dt>Responsive Web Design</dt>
-          <dd>freeCodeCamp</dd>
-          <dt>JavaScript Algorithms &amp; Data Structures</dt>
-          <dd>freeCodeCamp</dd>
-        </dl>
-      </div>
-
-      <div class="card">
-        <div class="h"><span class="annotation">How I work with AI</span><b></b></div>
-        <p class="note">
-          <strong>Spec first.</strong> Goals, data shapes and API contracts go into the repo before the first prompt.<br /><br />
-          <strong>Context, not re-explaining.</strong> Every repo carries a CLAUDE.md / AGENTS.md and a project-context file, so a fresh session starts warm and tokens go to the work.<br /><br />
-          <strong>Scoped tasks, delegated searches.</strong> Big jobs are split into small ones, long explorations go to subagents, and repeat work becomes a skill or slash command.<br /><br />
-          <strong>Right model for the job.</strong> Cheaper models for routine edits, the strongest for architecture; AI spend metered in the products I build.<br /><br />
-          <strong>Review everything.</strong> Agent output is a draft until it typechecks, passes tests and runs locally.
-        </p>
-      </div>
-
-      <div class="card">
-        <div class="h"><span class="annotation">Languages</span><b></b></div>
-        <p class="note">English (professional) · Urdu (native)</p>
+        <div class="org">University of the Punjab, Lahore <span>· 2018 – 2023</span></div>
+        <p class="note" style="margin-top:2mm"><strong>Data Science &amp; Machine Learning</strong> · Nexskill<br /><strong>Responsive Web Design</strong> · freeCodeCamp<br /><strong>JavaScript Algorithms &amp; Data Structures</strong> · freeCodeCamp</p>
+        <p class="note" style="margin-top:2mm">Languages: English (professional) · Urdu (native)</p>
       </div>
     </aside>
   </div>
+
+  <section class="wide">
+    <div class="h"><span class="annotation">03 / Selected AI &amp; automation projects</span><b></b></div>
+    <div class="projects">
+      <div class="proj">
+        <div class="t">ProspectIQ <span class="st">In production</span></div>
+        <div class="d">Plain-words lead research: GPT reads the request, a research database answers, every lead gets a reason it fits, ticked leads go into the CRM. Daily finders, credits, targeting, multi-client admin.</div>
+        <div class="s">Node.js · TypeScript · React · OpenAI · GoHighLevel API · GitHub Actions</div>
+      </div>
+      <div class="proj">
+        <div class="t">Call Processor Agent <span class="st">In production</span></div>
+        <div class="d">n8n agent for a mortgage lender: Whisper transcript, full-history GPT-4o summary, opportunity updates across pipelines, notes, follow-up and nurture email drafts. Idempotent, 72 nodes.</div>
+        <div class="s">n8n · GPT-4o · Whisper · GoHighLevel API</div>
+      </div>
+      <div class="proj">
+        <div class="t">Weekly Reporting Analyst <span class="st quiet">Pilot</span></div>
+        <div class="d">Monday-morning narrative report per CRM client. Metrics pulled and compared in PHP; Claude only narrates. Encrypted keys, idempotent weeks, mock mode.</div>
+        <div class="s">PHP 8 · SQLite · Anthropic API · OpenAI API</div>
+      </div>
+      <div class="proj">
+        <div class="t">Stale Lead Reviver</div>
+        <div class="d">Daily scan for dormant contacts, GPT-4o drafts in the client&#8217;s brand voice, human approval queue, inbound webhook classifies replies and stops the sequence.</div>
+        <div class="s">Node.js · React · Supabase · OpenAI API</div>
+      </div>
+      <div class="proj">
+        <div class="t">ClipForge <span class="st quiet">Personal</span></div>
+        <div class="d">YouTube link → reviewed 9:16 clips with karaoke captions. yt-dlp, FFmpeg, Whisper word timestamps, GPT scoring with structured output; every API call metered (≈ $0.37 per hour of video).</div>
+        <div class="s">Node.js · Prisma · PostgreSQL · React · FFmpeg · Docker</div>
+      </div>
+      <div class="proj">
+        <div class="t">Review Aggregator <span class="st">In production</span></div>
+        <div class="d">Google reviews scraped through an n8n workflow and Apify, analysed in a React 19 dashboard. OpenAPI-first with generated hooks and Zod validators.</div>
+        <div class="s">React 19 · Express 5 · Drizzle · n8n · Apify</div>
+      </div>
+      <div class="proj">
+        <div class="t">LinkedIn Outreach Engine</div>
+        <div class="d">CRM smartlist in; a Playwright worker on a clean residential IP sends paced connection requests and follow-ups; replies come back as warm leads. Caps, work-hours gating, IP-drift auto-pause.</div>
+        <div class="s">Node.js · PostgreSQL · Playwright · Docker</div>
+      </div>
+      <div class="proj">
+        <div class="t">TunnTunn app</div>
+        <div class="d">Community app on iOS and Android: stories, events, marketplace, chat, leaderboards. Upgraded to React Native 0.83 and the New Architecture; Firebase auth, AdMob, S3 uploads, Codemagic CI; release 1.4.0 live.</div>
+        <div class="s"><a href="https://apps.apple.com/us/app/id1574045168">App Store</a> · <a href="https://play.google.com/store/apps/details?id=com.yc.tunntunn">Google Play</a> · React Native · Redux Toolkit · Firebase · AWS S3</div>
+      </div>
+      <div class="proj">
+        <div class="t">FitTrack AI <span class="st quiet">Personal</span></div>
+        <div class="d">Offline-first fitness PWA with a deterministic coach. 36 specification documents written first, then built phase by phase with coding agents.</div>
+        <div class="s">React · TypeScript · PWA · IndexedDB</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wide">
+    <div class="h"><span class="annotation">How I work with AI</span><b></b></div>
+    <div class="howrow">
+      <div class="card"><strong>Spec first</strong><p>Goals, data shapes and API contracts go into the repo before the first prompt.</p></div>
+      <div class="card"><strong>Context first</strong><p>Every repo carries CLAUDE.md / AGENTS.md and a project-context file, so sessions start warm.</p></div>
+      <div class="card"><strong>Scoped tasks</strong><p>Big jobs are split into small ones, long explorations go to subagents, repeat work becomes a skill or slash command.</p></div>
+      <div class="card"><strong>Right model for the job</strong><p>Cheaper models for routine edits, the strongest for architecture; AI spend metered in the products I build.</p></div>
+      <div class="card"><strong>Review everything</strong><p>Agent output is a draft until it typechecks, passes tests and runs locally.</p></div>
+    </div>
+  </section>
+
+  <section class="wide">
+    <div class="h"><span class="annotation">04 / Earlier web work</span><b></b></div>
+    <ul class="sites"><li><a href="https://gogrow.ai">gogrow.ai</a></li><li><a href="https://stonewolfai.com">stonewolfai.com</a></li><li><a href="https://faasthub.com/faastdispatch">faasthub.com/faastdispatch</a></li><li><a href="https://www.ongeschrevenleven.nl">ongeschrevenleven.nl</a></li><li><a href="https://tunntunn.com">tunntunn.com</a><span> + mobile app</span></li><li><a href="https://uranlimited.com">uranlimited.com</a></li><li><a href="https://education.foodstreamnetwork.com">education.foodstreamnetwork.com</a></li><li><a href="https://connect.foodstreamnetwork.com">connect.foodstreamnetwork.com</a></li><li><a href="https://globalairentertainment.com">globalairentertainment.com</a></li><li><a href="https://enviropeel.com">enviropeel.com</a></li><li><a href="https://eversteadbusiness.co.uk">eversteadbusiness.co.uk</a></li><li><a href="https://www.massinteract.com">massinteract.com</a></li><li><a href="https://ramarion.com">ramarion.com</a></li><li><a href="https://catalystbreathworks.com">catalystbreathworks.com</a></li><li><a href="https://businessfinder.me">businessfinder.me</a></li><li><a href="https://rothys.com">rothys.com</a><span> (Shopify)</span></li><li><a href="https://progrowthadvisors.com">progrowthadvisors.com</a></li><li><a href="https://growcialmarketing.com">growcialmarketing.com</a></li><li><a href="https://biznesmarket.com.ua">biznesmarket.com.ua</a></li><li><a href="https://inchub.ae">inchub.ae</a></li><li><a href="https://decorboxstudio.com">decorboxstudio.com</a></li><li><a href="https://bluekryonllc.com">bluekryonllc.com</a></li><li><a href="https://prismeventsandtours.com">prismeventsandtours.com</a></li></ul>
+  </section>
 
   <div class="foot"><span>Ammar Maqsood · CV</span><span>Page 2 / 2</span></div>
 </div>

@@ -2,6 +2,8 @@ export interface ProjectLinks {
   live?: string;
   github?: string;
   caseStudy?: string;
+  appStore?: string;
+  playStore?: string;
 }
 
 export interface ProjectImage {

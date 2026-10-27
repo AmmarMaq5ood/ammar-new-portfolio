@@ -16,6 +16,10 @@ interface ProjectRowProps {
  */
 export function ProjectRow({ project, code, index }: ProjectRowProps) {
   const live = project.links?.live;
+  const stores = [
+    project.links?.appStore && { label: "App Store", href: project.links.appStore },
+    project.links?.playStore && { label: "Google Play", href: project.links.playStore },
+  ].filter((x): x is { label: string; href: string } => Boolean(x));
   const inner = (
     <>
       <span className="font-mono text-xs text-muted transition-colors group-hover:text-accent">
@@ -27,6 +31,21 @@ export function ProjectRow({ project, code, index }: ProjectRowProps) {
           {project.title}
         </span>
         <span className="mt-1 block text-sm text-muted">{project.tagline}</span>
+        {stores.length > 0 && (
+          <span className="mt-2 flex flex-wrap gap-2">
+            {stores.map((st) => (
+              <a
+                key={st.href}
+                href={st.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 rounded-sm bg-tile px-2 py-1 text-[11px] font-semibold text-ink transition-colors hover:bg-accent hover:text-white"
+              >
+                {st.label} <span aria-hidden>↗</span>
+              </a>
+            ))}
+          </span>
+        )}
       </span>
 
       <span className="hidden text-right text-[12px] leading-relaxed text-muted lg:block">
@@ -41,13 +60,13 @@ export function ProjectRow({ project, code, index }: ProjectRowProps) {
             : "text-line"
         }`}
       >
-        {live ? "↗" : "—"}
+        {live ? "↗" : stores.length > 0 ? "" : "—"}
       </span>
     </>
   );
 
   const rowClasses =
-    "group grid grid-cols-[3.25rem_minmax(0,1fr)_1.75rem] items-baseline gap-x-3 border-b border-line py-5 transition-colors duration-200 lg:grid-cols-[4rem_minmax(0,1fr)_minmax(0,300px)_1.75rem] lg:gap-x-6";
+    "group -mx-3 grid grid-cols-[3.25rem_minmax(0,1fr)_1.75rem] items-baseline gap-x-3 rounded-md border-b border-line px-3 py-5 transition-colors duration-200 md:-mx-4 md:px-4 lg:grid-cols-[4rem_minmax(0,1fr)_minmax(0,300px)_1.75rem] lg:gap-x-6";
 
   if (!live) {
     return <div className={rowClasses}>{inner}</div>;

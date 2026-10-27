@@ -66,7 +66,7 @@ export function Work() {
               )}
 
               {category.layout === "ledger" && (
-                <ul className="border-t border-line">
+                <ul className="-mx-3 border-t border-line px-3 md:-mx-4 md:px-4">
                   {category.projects.map((project, pi) => (
                     <li key={project.id}>
                       <ProjectRow
